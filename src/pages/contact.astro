@@ -1,0 +1,49 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { siteConfig, homePath, homeUrl } from '../lib/site';
+
+const contact = siteConfig.contactDisplay;
+
+const sections = [
+  { id: 'contact-details', label: 'Contact details' },
+  { id: 'limits', label: 'What this page is not' },
+];
+---
+
+<LegalLayout
+  title="Contact"
+  description="Contact details for vvstreams.site. The published address links back to the configured homepage."
+  heading="Contact"
+  lede="The site’s published address, and what it can and cannot be used for."
+  updated="24 October 2026"
+  sections={sections}
+>
+  <h2 id="contact-details">Contact details</h2>
+  <dl class="contact-block">
+    <dt>Published address</dt>
+    <dd><a href={homeUrl}>{contact}</a></dd>
+    <p>
+      Selecting the address opens the homepage. This site does not run a contact form, a mailbox or
+      a support desk.
+    </p>
+  </dl>
+  <p>
+    The quickest way to get the current file is to use the download section on the homepage. It
+    links to the developer’s published GitHub release and shows the version and size to expect.
+  </p>
+  <p>
+    <a class="btn btn--dark" href={`${homePath}#download`}>Go to the download section</a>
+  </p>
+
+  <h2 id="limits">What this page is not</h2>
+  <p>
+    This site is an independent information and download page. It does not provide technical support
+    for the app, sell subscriptions, host video, or control what the app shows. Questions about the
+    app itself, playback, accounts or content should go to the app’s developer or to the service you
+    are using.
+  </p>
+  <p>
+    For legal or rights matters, see the <a href="/copyright/">copyright page</a> and the{' '}
+    <a href="/disclaimer/">disclaimer</a>.
+  </p>
+</LegalLayout>

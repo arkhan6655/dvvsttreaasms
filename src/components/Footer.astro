@@ -1,0 +1,43 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/vvstreams-logo-640.webp';
+import { siteConfig, homePath, homeUrl, navItems, legalLinks } from '../lib/site';
+
+const { brand, tagline, contactDisplay } = siteConfig;
+const year = new Date().getFullYear();
+const anchor = (hash: string) => `${homePath}#${hash}`;
+---
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <Image src={logo} width={92} height={92} alt="" loading="lazy" decoding="async" />
+        <div>
+          <a class="footer-brand__name" href={homePath}>{brand}</a>
+          <p>{tagline}. Independent download and setup page. Not affiliated with any league, team, broadcaster or streaming provider.</p>
+        </div>
+      </div>
+
+      <div class="footer-cols">
+        <div>
+          <h2>Download page</h2>
+          <ul>
+            {navItems.map((item) => <li><a href={anchor(item.hash)}>{item.label}</a></li>)}
+          </ul>
+        </div>
+        <div>
+          <h2>Legal</h2>
+          <ul>
+            {legalLinks.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© {year} {brand}. Android is a trademark of Google LLC.</p>
+      <p><a href={homeUrl}>{contactDisplay}</a></p>
+    </div>
+  </div>
+</footer>

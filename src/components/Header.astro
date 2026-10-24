@@ -1,0 +1,56 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/vvstreams-logo-640.webp';
+import { siteConfig, homePath, navItems } from '../lib/site';
+
+const { brand, tagline, apk } = siteConfig;
+const anchor = (hash: string) => `${homePath}#${hash}`;
+---
+
+<header class="site-header" data-header>
+  <div class="wrap header-inner">
+    <a class="brand" href={homePath} aria-label={`${brand} — homepage`}>
+      <Image
+        src={logo}
+        width={76}
+        height={76}
+        alt=""
+        class="brand__mark"
+        loading="eager"
+        decoding="async"
+      />
+      <span>
+        <span class="brand__name">{brand}</span>
+        <span class="brand__tag">{tagline}</span>
+      </span>
+    </a>
+
+    <nav class="nav" aria-label="Primary" data-spy>
+      {
+        navItems.map((item) => (
+          <a
+            class:list={['nav__link', item.hash === 'download' && 'nav__link--cta']}
+            href={anchor(item.hash)}
+          >
+            {item.label}
+            {item.hash === 'download' && (
+              <span class="btn__arrow" aria-hidden="true">
+                ↓
+              </span>
+            )}
+          </a>
+        ))
+      }
+    </nav>
+
+    <span class="version-badge" aria-label={`Version ${apk.version}`}>v{apk.version}</span>
+
+    <details class="menu" data-menu>
+      <summary class="menu__toggle">Menu</summary>
+      <nav class="menu__panel" aria-label="Mobile" data-spy>
+        {navItems.map((item) => <a href={anchor(item.hash)}>{item.label}</a>)}
+        <a class="menu__cta" href={homePath}>Homepage</a>
+      </nav>
+    </details>
+  </div>
+</header>

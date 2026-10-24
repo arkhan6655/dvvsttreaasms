@@ -1,0 +1,68 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/vvstreams-logo-640.webp';
+import { siteConfig, releaseLabel } from '../lib/site';
+
+const { brand, tagline, apk } = siteConfig;
+const rows = [
+  ['Version', apk.version],
+  ['Build', apk.build],
+  ['File size', apk.sizeLabel],
+  ['Minimum Android', `${apk.minAndroid} (API 24)`],
+  ['Package', apk.packageName],
+  ['Released', releaseLabel],
+];
+---
+
+<section class="hero" aria-labelledby="page-title">
+  <div class="wrap hero__inner">
+    <div>
+      <p class="kicker">Android · Mobile &amp; TV</p>
+      <h1 id="page-title">
+        <span>VVStreams</span>
+        <span class="accent">Download</span>
+      </h1>
+      <p class="hero__tagline">{tagline}.</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#download">
+          Download APK
+          <span class="btn__arrow" aria-hidden="true">↓</span>
+        </a>
+        <a class="btn btn--ghost" href="#install">How to install</a>
+      </div>
+      <p class="hero__note">Version {apk.version} · {apk.sizeLabel} · Android {apk.minAndroid}+</p>
+    </div>
+
+    <aside class="spec-card" aria-label={`${brand} file details`}>
+      <div class="spec-card__head">
+        <Image
+          src={logo}
+          width={92}
+          height={92}
+          alt=""
+          class="spec-card__logo"
+          loading="eager"
+          decoding="async"
+        />
+        <div>
+          <span class="spec-card__name">{brand}</span>
+          <span class="spec-card__meta">Android application · APK</span>
+        </div>
+      </div>
+
+      <dl class="spec-list">
+        {rows.map(([label, value]) => (
+          <div>
+            <dt>{label}</dt>
+            <dd>{value}</dd>
+          </div>
+        ))}
+      </dl>
+
+      <p class="spec-card__foot">
+        <span class="dot" aria-hidden="true"></span>
+        Direct link in the download section
+      </p>
+    </aside>
+  </div>
+</section>

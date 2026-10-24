@@ -1,0 +1,530 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Ticker from '../components/Ticker.astro';
+import SectionHead from '../components/SectionHead.astro';
+import DownloadCard from '../components/DownloadCard.astro';
+import FaqList from '../components/FaqList.astro';
+import { sports } from '../data/sports';
+import { deviceRows } from '../data/devices';
+import { faqs } from '../data/faqs';
+import {
+  siteConfig,
+  homePath,
+  homeUrl,
+  homeDescription,
+  ogImage,
+  releaseLabel,
+} from '../lib/site';
+
+export function getStaticPaths() {
+  return [{ params: { home: siteConfig.homeSlug } }];
+}
+
+const { apk, brand, contactDisplay } = siteConfig;
+
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: brand,
+  alternateName: 'VVStreams',
+  applicationCategory: 'MultimediaApplication',
+  operatingSystem: 'Android 7.0+',
+  softwareVersion: apk.version,
+  softwareRequirements: 'Android 7.0 (API 24) or newer',
+  fileSize: `${apk.sizeBytes} bytes`,
+  downloadUrl: apk.url,
+  datePublished: apk.releaseDate,
+  url: homeUrl,
+  image: ogImage,
+  publisher: {
+    '@type': 'Organization',
+    name: brand,
+    url: homeUrl,
+  },
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.a,
+    },
+  })),
+};
+---
+
+<BaseLayout
+  title={siteConfig.seoTitle}
+  description={homeDescription}
+  canonicalPath={homePath}
+  schema={[softwareSchema, faqSchema]}
+>
+  <Hero />
+  <Ticker />
+
+  <section id="overview" class="section">
+    <div class="wrap">
+      <SectionHead
+        num="01"
+        title="What VVStreams is"
+        lede="A compact Android app for following live sport, with the file details, install steps and limits set out before you download."
+      />
+      <div class="overview">
+        <p class="overview__lead">
+          One APK, a small download, and a clear path from browser to home screen.
+        </p>
+        <div class="overview__copy">
+          <p>
+            VVStreams is an Android app for following live sports. It is distributed as a single
+            APK rather than through the Play Store, which is why this page exists: to explain the
+            file, the devices it runs on, and what to expect while installing it.
+          </p>
+          <p>
+            The current release is version {apk.version}, build {apk.build}. It is {apk.sizeLabel},
+            supports Android {apk.minAndroid} and newer, and includes native libraries for four CPU
+            architectures. That covers most modern phones, tablets, TV boxes and emulators.
+          </p>
+          <p>
+            This is an independent page. It does not host video, run the app, or control what the
+            developer ships. Details are checked against the published file and updated when the
+            release changes.
+          </p>
+        </div>
+      </div>
+
+      <dl class="fact-strip">
+        <div>
+          <dt>APK size</dt>
+          <dd>{apk.sizeLabel}</dd>
+        </div>
+        <div>
+          <dt>Minimum Android</dt>
+          <dd>{apk.minAndroid}+</dd>
+        </div>
+        <div>
+          <dt>CPU support</dt>
+          <dd>4 ABIs</dd>
+        </div>
+        <div>
+          <dt>Current build</dt>
+          <dd>{apk.version} / {apk.build}</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section id="sports" class="section">
+    <div class="wrap">
+      <SectionHead
+        num="02"
+        title="Sports coverage"
+        lede="The app is organised around the sports below. A category being listed does not guarantee a specific match, channel or competition in your country."
+      />
+      <ul class="sport-grid">
+        {
+          sports.map((sport, index) => (
+            <li>
+              <span class="sport-grid__num">{String(index + 1).padStart(2, '0')}</span>
+              <span>
+                <span class="sport-grid__name">{sport.name}</span>
+                <span class="sport-grid__desc">{sport.descriptor}</span>
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="sport-note">
+        Schedules, competitions and availability change through the season and vary by region.
+        Broadcast rights are usually sold territory by territory, so an event available in one
+        country may be unavailable in another. This page does not provide streams or regional
+        workarounds.
+      </p>
+    </div>
+  </section>
+
+  <DownloadCard />
+
+  <section id="devices" class="section">
+    <div class="wrap">
+      <SectionHead
+        num="04"
+        title="Devices and compatibility"
+        lede="One APK covers phones, tablets, TV boxes and emulators. Installation is the part that changes from device to device."
+      />
+      <div class="table-block">
+        <table class="data-table">
+          <caption class="sr-only">VVStreams device compatibility</caption>
+          <thead>
+            <tr>
+              <th scope="col">Device</th>
+              <th scope="col">Support</th>
+              <th scope="col">Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              deviceRows.map((row) => (
+                <tr>
+                  <th scope="row" class="cell-device">{row.device}</th>
+                  <td class="cell-support">
+                    <span
+                      class:list={[
+                        'tag',
+                        row.support === 'Supported' && 'tag--yes',
+                        row.support === 'Not supported' && 'tag--no',
+                      ]}
+                    >
+                      {row.support}
+                    </span>
+                  </td>
+                  <td class="cell-note">{row.note}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <p class="table-note">
+        Android TV and Fire TV usually require sideloading. Fire OS is based on Android but differs
+        from Google-certified Android TV, so behaviour can vary by device and system version. Test
+        the app on your own hardware before relying on it.
+      </p>
+    </div>
+  </section>
+
+  <section id="install" class="section">
+    <div class="wrap">
+      <SectionHead
+        num="05"
+        title="Install guide"
+        lede="Four steps on a phone or tablet. Sideloading is allowed by Android, but it is switched off for each source until you enable it."
+      />
+      <ol class="steps">
+        <li>
+          <span class="steps__num">Step 01</span>
+          <h3>Download the file</h3>
+          <p>
+            Use the APK button in section 03. The download is {apk.sizeLabel}, so it should be quick
+            even on mobile data.
+          </p>
+        </li>
+        <li>
+          <span class="steps__num">Step 02</span>
+          <h3>Allow the source</h3>
+          <p>
+            Android blocks APKs from browsers and file managers by default. When prompted, open
+            Settings and allow installs from the app you are using. The permission applies only to
+            that app.
+          </p>
+        </li>
+        <li>
+          <span class="steps__num">Step 03</span>
+          <h3>Open and confirm</h3>
+          <p>
+            Find <strong>VVStreams-{apk.version}.apk</strong> in your Downloads folder, tap it, review
+            the permissions shown, and choose Install.
+          </p>
+        </li>
+        <li>
+          <span class="steps__num">Step 04</span>
+          <h3>Launch the app</h3>
+          <p>
+            Open VVStreams from the app drawer. If Play Protect shows a warning for an app it does
+            not recognise, read it before deciding whether to continue.
+          </p>
+        </li>
+      </ol>
+
+      <div class="callout">
+        <h3>Android TV, Google TV and Fire TV</h3>
+        <p>
+          These devices usually need a sideloading tool. Install Downloader from the TV’s app store,
+          allow installs from Downloader, then open the GitHub release page in its built-in browser.
+          The same APK works. A remote is enough to navigate, though a mouse helps with some system
+          dialogs.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="version" class="section">
+    <div class="wrap">
+      <SectionHead
+        num="06"
+        title="Version and file details"
+        lede="The numbers below describe the file linked on this page. They are useful when checking that a download finished correctly."
+      />
+      <dl class="version-grid">
+        <div>
+          <dt>Version</dt>
+          <dd>{apk.version}</dd>
+        </div>
+        <div>
+          <dt>Build</dt>
+          <dd>{apk.build}</dd>
+        </div>
+        <div>
+          <dt>File size</dt>
+          <dd>{apk.sizeLabel}</dd>
+        </div>
+        <div>
+          <dt>Minimum Android</dt>
+          <dd>{apk.minAndroid} / API 24</dd>
+        </div>
+        <div>
+          <dt>Package</dt>
+          <dd>{apk.packageName}</dd>
+        </div>
+        <div>
+          <dt>Released</dt>
+          <dd>{releaseLabel}</dd>
+        </div>
+      </dl>
+      <p class="table-note">
+        <strong>Architectures:</strong> {apk.architectures}. These values were read from the published
+        file and its manifest before this page was updated: versionName {apk.version}, versionCode
+        {' '}{apk.build}, minSdk 24, and {apk.sizeBytes.toLocaleString('en-GB')} bytes. A new build can
+        appear at the release link at any time, so check the file details your browser shows before
+        installing.
+      </p>
+    </div>
+  </section>
+
+  <section id="guide" class="section">
+    <div class="wrap">
+      <SectionHead
+        num="07"
+        title="The longer guide"
+        lede="What the app does, how to install it without surprises, and where its limits are."
+      />
+      <div class="article-layout">
+        <article class="prose">
+          <h3 id="what-it-is">What the app is built for</h3>
+          <p>
+            VVStreams is aimed at people who follow several sports and want one Android app instead
+            of a folder of bookmarks. The interface is built around sports categories, with scores,
+            schedules and match information gathered in one place. It is not a general-purpose video
+            player, and it does not replace a paid broadcaster.
+          </p>
+          <p>
+            Because the app is installed from an APK rather than an app store, you are responsible
+            for the install. That is not unusual on Android, especially for TV boxes and apps that
+            are distributed outside the Play Store. It does mean the source of the file matters more
+            than it would for a store download.
+          </p>
+
+          <h3 id="before-you-install">Before you install</h3>
+          <p>Three checks take less than a minute and prevent most failed installs:</p>
+          <ul>
+            <li>
+              <strong>Android version.</strong> You need Android {apk.minAndroid} (API 24) or newer.
+              Older devices will refuse the package.
+            </li>
+            <li>
+              <strong>Free storage.</strong> The download is {apk.sizeLabel}, but Android needs extra
+              room while unpacking and installing. Keep at least a few hundred megabytes free.
+            </li>
+            <li>
+              <strong>Install permission.</strong> The browser or file manager you use must be
+              allowed to install unknown apps. This is a per-app setting, not a global switch.
+            </li>
+          </ul>
+
+          <h3 id="safer-download">A safer way to download an APK</h3>
+          <p>
+            APK files sit outside the Play Store review process, so treat every download as
+            untrusted until you have checked it. The{' '}
+            <a href="#download">download section on this page</a> points to the developer’s GitHub
+            release. GitHub shows the file name and size before the transfer starts; both should
+            match the details above.
+          </p>
+          <p>
+            Be careful with pages that wrap an APK in an installer, add “mod” features, or ask you to
+            complete a survey before the file appears. Those files are not the release referenced
+            here. A familiar-looking logo is not proof that a build is genuine.
+          </p>
+
+          <h3 id="phone-install">Installing on a phone or tablet</h3>
+          <ol>
+            <li>Download the APK and wait for the browser to report that it has finished.</li>
+            <li>Open the notification, or find the file in your Downloads folder.</li>
+            <li>
+              If Android blocks the install, choose Settings in the prompt, enable the source, then
+              return to the file.
+            </li>
+            <li>Review the permissions listed, then tap Install.</li>
+            <li>Open the app from the app drawer once the installer finishes.</li>
+          </ol>
+          <p>
+            If you already have an older VVStreams build, installing the new APK over it usually
+            keeps your data. Android only allows that when the package name and signing identity
+            match. If they do not, the installer will ask you to remove the old copy first.
+          </p>
+
+          <h3 id="tv-install">Installing on Android TV</h3>
+          <p>
+            TV devices hide the browser and file manager that phones take for granted. The simplest
+            route is the Downloader app: install it from your TV’s app store, open its settings,
+            allow installs from Downloader, then load the release page in Downloader’s browser. The
+            APK is the same file used on phones.
+          </p>
+          <p>
+            A remote works for most of the interface. Some install dialogs are easier with a mouse
+            or a remote that supports pointer mode. If the app opens in a phone-shaped window, check
+            the display settings on the device before assuming the build is broken.
+          </p>
+
+          <h3 id="updates">Keeping the app updated</h3>
+          <p>
+            Sideloaded apps do not update automatically. When the developer publishes a new version,
+            download it from the same release source and install it over the existing copy. Watch
+            for a package or signature mismatch: that usually means the new file was built with a
+            different key, and Android will require a clean install.
+          </p>
+          <p>
+            A clean install removes local settings and any saved preferences. If that matters, check
+            whether the app offers a backup or export before you uninstall the old version.
+          </p>
+
+          <h3 id="troubleshooting">When something goes wrong</h3>
+          <ul>
+            <li>
+              <strong>“App not installed.”</strong> Usually a signing mismatch, a full storage
+              partition, or a managed device policy. Uninstall the old copy only if you accept losing
+              its data.
+            </li>
+            <li>
+              <strong>“Parse error.”</strong> The download is incomplete or corrupted. Delete it and
+              download again; do not try to repair the file.
+            </li>
+            <li>
+              <strong>Play Protect warning.</strong> This is Android’s reputation check for apps it
+              has not seen before. Read the message. Do not disable protections permanently just to
+              get one app installed.
+            </li>
+            <li>
+              <strong>No picture or constant buffering.</strong> That is a playback or network issue,
+              not something this page can fix. Check your connection, the source, and the device’s
+              available memory.
+            </li>
+            <li>
+              <strong>The remote cannot reach a button.</strong> Enable pointer mode on the remote,
+              or connect a USB mouse for the setup screens.
+            </li>
+          </ul>
+
+          <h3 id="limits">What this page does not do</h3>
+          <blockquote>
+            This page does not host video, provide streams, sell subscriptions, or bypass regional
+            restrictions.
+          </blockquote>
+          <p>
+            It is a download and setup resource, not a broadcaster. Sports rights are territorial
+            and change over time, so availability inside the app depends on the developer, the
+            content providers and the country you are in. Use services you are entitled to access,
+            and follow their terms.
+          </p>
+        </article>
+
+        <aside class="article-aside" aria-label="In this guide">
+          <h3>In this guide</h3>
+          <ol>
+            <li><a href="#what-it-is">What the app is built for</a></li>
+            <li><a href="#before-you-install">Before you install</a></li>
+            <li><a href="#safer-download">A safer way to download</a></li>
+            <li><a href="#phone-install">Installing on a phone</a></li>
+            <li><a href="#tv-install">Installing on Android TV</a></li>
+            <li><a href="#updates">Keeping the app updated</a></li>
+            <li><a href="#troubleshooting">When something goes wrong</a></li>
+            <li><a href="#limits">What this page does not do</a></li>
+          </ol>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="section">
+    <div class="wrap">
+      <SectionHead
+        num="08"
+        title="Frequently asked questions"
+        lede="Short answers about the file, the supported devices, and what happens after installation."
+      />
+      <FaqList />
+    </div>
+  </section>
+
+  <section id="rights" class="section">
+    <div class="wrap">
+      <SectionHead
+        num="09"
+        title="Content rights and safety"
+        lede="Two separate issues: what you are allowed to watch, and how to install the file without taking unnecessary risks."
+      />
+      <div class="card-grid">
+        <div class="card card--accent">
+          <h3>Content and rights</h3>
+          <p>
+            VVStreams is a client application. This page does not host, store or transmit video.
+            Broadcast rights are territorial and change over time.
+          </p>
+          <p>
+            Use the app only for content you are entitled to access, and follow the terms of the
+            services you use. Nothing on this page grants a licence to any match, channel or feed.
+          </p>
+        </div>
+        <div class="card card--accent">
+          <h3>Installing safely</h3>
+          <ul>
+            <li>Download only from the release linked on this page.</li>
+            <li>Compare the file name and size with the details above.</li>
+            <li>Review the permissions Android lists before installing.</li>
+            <li>Scan the file with your own security software if you are unsure.</li>
+            <li>Avoid modified or “patched” builds from unknown sites.</li>
+          </ul>
+          <p class="card__tail">
+            No app is risk-free. If you are not comfortable sideloading, do not install it.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <div class="wrap">
+      <SectionHead
+        num="10"
+        title="About this page"
+        lede="Who wrote this, what was checked, and how to get back to the download."
+      />
+      <div class="about-grid">
+        <div>
+          <p>
+            {brand} is an independent information and download page for the VVStreams Android
+            application. It is maintained separately from the app’s developer and is not operated,
+            endorsed or sponsored by any league, team, broadcaster or streaming service.
+          </p>
+          <p>
+            The file details on this page were checked against the published APK before publication.
+            There are no ads or sponsored placements here. When the release changes, the version,
+            size and install notes are reviewed together.
+          </p>
+          <p>
+            Page last reviewed: {releaseLabel}. For the current file, use the download section on
+            this page rather than a copy hosted somewhere else.
+          </p>
+        </div>
+        <dl class="contact-block">
+          <dt>Site contact</dt>
+          <dd><a href={homeUrl}>{contactDisplay}</a></dd>
+          <p>Selecting the address returns to the homepage. This site does not operate a contact form.</p>
+        </dl>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

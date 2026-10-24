@@ -1,0 +1,103 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { siteConfig, homeUrl } from '../lib/site';
+
+const contact = siteConfig.contactDisplay;
+
+const sections = [
+  { id: 'acceptance', label: 'Acceptance' },
+  { id: 'the-site', label: 'What this site is' },
+  { id: 'download', label: 'Download and licence' },
+  { id: 'acceptable-use', label: 'Acceptable use' },
+  { id: 'third-party', label: 'Third-party services' },
+  { id: 'no-warranty', label: 'No warranty' },
+  { id: 'liability', label: 'Limitation of liability' },
+  { id: 'changes', label: 'Changes' },
+  { id: 'contact', label: 'Contact' },
+];
+---
+
+<LegalLayout
+  title="Terms of Use"
+  description="The terms that apply when you use vvstreams.site, including the APK download, acceptable use and liability."
+  heading="Terms of Use"
+  lede="The rules for using this page and the download it provides."
+  updated="24 October 2026"
+  sections={sections}
+>
+  <h2 id="acceptance">Acceptance</h2>
+  <p>
+    By using vvstreams.site, you agree to these terms. If you do not agree, stop using the site. If
+    you use the site on behalf of an organisation, you confirm that you have authority to accept
+    these terms for it.
+  </p>
+
+  <h2 id="the-site">What this site is</h2>
+  <p>
+    This is an independent information and download page for the VVStreams Android application. It
+    is not the app, the app’s developer, a broadcaster, a league, or a streaming service. The site
+    provides file details, installation notes and links to a release hosted elsewhere.
+  </p>
+  <p>
+    The site is free to read. No account or subscription is required to use it.
+  </p>
+
+  <h2 id="download">Download and licence</h2>
+  <p>
+    The APK is made available by its developer through GitHub. Your download is between you and that
+    release host. This site does not host the file and cannot guarantee that a release will remain
+    available, unchanged or compatible with your device.
+  </p>
+  <p>
+    Any licence to use the app comes from the app’s developer or the terms shipped with the app.
+    Nothing on this page grants you a licence to the app, its content, or any broadcast.
+  </p>
+
+  <h2 id="acceptable-use">Acceptable use</h2>
+  <p>You agree not to:</p>
+  <ul>
+    <li>use this site to break any law or to infringe the rights of another person;</li>
+    <li>attempt to disrupt, overload or gain unauthorised access to the site or its infrastructure;</li>
+    <li>scrape the site at a volume that interferes with normal use;</li>
+    <li>misrepresent this site as an authorised source for any league, team, broadcaster or app.</li>
+  </ul>
+  <p>
+    You are responsible for checking that installing an Android APK is permitted on your device and
+    in your region, and for complying with the terms of any service you access through the app.
+  </p>
+
+  <h2 id="third-party">Third-party services</h2>
+  <p>
+    The site links to GitHub and uses Histats for analytics. Those services are independent and have
+    their own terms and privacy policies. This site does not control their availability, content or
+    data practices.
+  </p>
+
+  <h2 id="no-warranty">No warranty</h2>
+  <p>
+    The site is provided “as is” and “as available”. To the extent permitted by law, no warranty is
+    made about accuracy, completeness, uninterrupted availability, fitness for a particular purpose,
+    or the safety of any file offered by a third party. File details are checked in good faith but can
+    change when a developer publishes a new build.
+  </p>
+
+  <h2 id="liability">Limitation of liability</h2>
+  <p>
+    To the extent permitted by law, this site and its operator are not liable for indirect or
+    consequential loss, loss of data, device problems, service interruption, or losses arising from
+    your use of the app or of a linked third-party service. Nothing in these terms limits liability
+    that cannot lawfully be limited, or affects mandatory consumer rights you may have.
+  </p>
+
+  <h2 id="changes">Changes</h2>
+  <p>
+    These terms may be updated as the site changes. The revision date at the top of the page shows
+    the current version. Continued use after a change means you accept the updated terms.
+  </p>
+
+  <h2 id="contact">Contact</h2>
+  <p>
+    See the <a href="/contact/">contact page</a> for the published site details. The address shown
+    there is <a href={homeUrl}>{contact}</a>; selecting it returns to the homepage.
+  </p>
+</LegalLayout>

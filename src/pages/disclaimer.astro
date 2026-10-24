@@ -1,0 +1,84 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { siteConfig, homeUrl } from '../lib/site';
+
+const contact = siteConfig.contactDisplay;
+
+const sections = [
+  { id: 'independence', label: 'Independence' },
+  { id: 'no-streams', label: 'No streams or video' },
+  { id: 'availability', label: 'Availability and rights' },
+  { id: 'installation-risk', label: 'Installation risk' },
+  { id: 'external-links', label: 'External links' },
+  { id: 'contact', label: 'Contact' },
+];
+---
+
+<LegalLayout
+  title="Disclaimer"
+  description="VVStreams.site is an independent download page. It is not affiliated with any league, team, broadcaster or streaming service."
+  heading="Disclaimer"
+  lede="What this page is, what it is not, and the limits that apply to the information here."
+  updated="24 October 2026"
+  sections={sections}
+>
+  <h2 id="independence">Independence</h2>
+  <p>
+    vvstreams.site is an independent information and download page for the VVStreams Android
+    application. It is not operated, endorsed, sponsored or approved by any league, team, club,
+    broadcaster, streaming platform, or by the app’s developer.
+  </p>
+  <p>
+    Team names, competition names, trademarks and logos belong to their respective owners. Any
+    reference on this site is descriptive and does not imply affiliation or endorsement.
+  </p>
+
+  <h2 id="no-streams">No streams or video</h2>
+  <p>
+    This page does not host, store, transmit or provide access to live video, recorded video,
+    channels or feeds. It does not sell subscriptions, accounts or access codes. It links to an APK
+    published by the app’s developer and explains how to install it.
+  </p>
+  <p>
+    Descriptions of sports categories refer to how the app is organised, not to a promise that a
+    particular match, competition or channel is available.
+  </p>
+
+  <h2 id="availability">Availability and rights</h2>
+  <p>
+    Broadcast rights are territorial and time-limited. An event available in one country may not be
+    available in another, and schedules change without notice. Availability inside the app depends on
+    the developer, the content providers and your region.
+  </p>
+  <p>
+    You are responsible for using the app only for content you are entitled to access and for
+    following the terms of the services you use. This page does not provide regional workarounds or
+    instructions for bypassing restrictions.
+  </p>
+
+  <h2 id="installation-risk">Installation risk</h2>
+  <p>
+    Installing an Android APK from outside an app store carries risk. Files can be modified,
+    replaced, or bundled with unwanted software. Download from the release linked on this page,
+    compare the file details shown by your browser, review the permissions Android lists, and use
+    your own security tools if you are unsure.
+  </p>
+  <p>
+    No app can be guaranteed free of defects or malicious behaviour. You install and use the app at
+    your own risk. This site is not responsible for damage to a device, loss of data, or loss arising
+    from the app or from a third-party download host.
+  </p>
+
+  <h2 id="external-links">External links</h2>
+  <p>
+    Links to GitHub and other sites are provided for convenience. Those sites are outside this
+    site’s control, and their content, terms and privacy practices may change. A link does not imply
+    endorsement.
+  </p>
+
+  <h2 id="contact">Contact</h2>
+  <p>
+    Published site details are on the <a href="/contact/">contact page</a>. The address shown there
+    is <a href={homeUrl}>{contact}</a>; selecting it returns to the homepage.
+  </p>
+</LegalLayout>

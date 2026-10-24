@@ -1,0 +1,52 @@
+---
+import { siteConfig, releaseLabel } from '../lib/site';
+
+const { apk } = siteConfig;
+const facts = [
+  ['Version', apk.version],
+  ['Build', apk.build],
+  ['File size', apk.sizeLabel],
+  ['Minimum Android', `${apk.minAndroid} (API 24)`],
+  ['Package', apk.packageName],
+  ['Released', releaseLabel],
+];
+---
+
+<section id="download" class="section section--dark" aria-labelledby="download-title">
+  <div class="wrap">
+    <div class="download-panel">
+      <div>
+        <p class="download-panel__label">03 / Direct download</p>
+        <h2 id="download-title">Download<br />VVStreams APK</h2>
+        <p class="download-panel__copy">
+          Version <strong>{apk.version}</strong>, published {releaseLabel}. The button opens the
+          developer’s GitHub release and downloads a {apk.sizeLabel} APK file.
+        </p>
+        <div class="download-actions">
+          <a class="btn btn--primary" href={apk.url}>
+            Download VVStreams {apk.version} APK
+            <span class="btn__arrow" aria-hidden="true">↓</span>
+          </a>
+        </div>
+        <p class="download-hint">
+          <strong>{apk.sizeLabel}</strong> · Android {apk.minAndroid}+ · {apk.architectures}
+        </p>
+      </div>
+
+      <dl class="download-facts" aria-label="APK details">
+        {facts.map(([label, value]) => (
+          <div>
+            <dt>{label}</dt>
+            <dd>{value}</dd>
+          </div>
+        ))}
+      </dl>
+
+      <p class="download-panel__note">
+        <strong>Before you continue:</strong> this link leaves vvstreams.site and opens GitHub, which
+        serves the file. If your browser asks you to confirm the download, check that the file name
+        ends in <strong>.apk</strong> before installing. This page does not host or modify the APK.
+      </p>
+    </div>
+  </div>
+</section>

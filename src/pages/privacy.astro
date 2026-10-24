@@ -1,0 +1,129 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { siteConfig, homeUrl } from '../lib/site';
+
+const contact = siteConfig.contactDisplay;
+
+const sections = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'analytics', label: 'Analytics and Histats' },
+  { id: 'cookies', label: 'Cookies' },
+  { id: 'logs', label: 'Hosting logs' },
+  { id: 'advertising', label: 'Advertising' },
+  { id: 'choices', label: 'Your choices' },
+  { id: 'children', label: 'Children' },
+  { id: 'changes', label: 'Changes' },
+  { id: 'contact', label: 'Contact' },
+];
+---
+
+<LegalLayout
+  title="Privacy Policy"
+  description="How vvstreams.site uses Histats analytics, cookies and hosting logs, and what choices visitors have."
+  heading="Privacy Policy"
+  lede="What is collected when you visit this page, why it is collected, and how to limit it."
+  updated="24 October 2026"
+  sections={sections}
+>
+  <h2 id="overview">Overview</h2>
+  <p>
+    This policy explains what happens to information when you use vvstreams.site. The site is a
+    static download and information page for the VVStreams Android app. It has no user accounts, no
+    comments, no contact form and no checkout.
+  </p>
+  <p>
+    The policy covers this website only. It does not cover the VVStreams app itself, GitHub (where
+    the APK is hosted), or any service you open from a link on this page. Those services have their
+    own privacy policies.
+  </p>
+
+  <h2 id="analytics">Analytics and Histats</h2>
+  <p>
+    This site loads Histats, a third-party web statistics service, on every page. The Histats site
+    ID used here is <strong>{siteConfig.analytics.histatsId}</strong>. The script runs for every
+    visitor and is not placed behind a consent banner or a delayed loader.
+  </p>
+  <p>
+    Histats records page views and visit information. That can include your IP address, approximate
+    location derived from it, browser and device type, operating system, referring page, the pages
+    you open and the time of the visit. Histats may also set cookies or similar identifiers in your
+    browser. The reports are used to understand traffic, see which pages are useful and keep the
+    site working.
+  </p>
+  <p>
+    Histats is an independent service. Its own privacy policy and retention practices apply to the
+    data it receives. This site does not combine Histats data with any other information and does
+    not use it to identify you by name.
+  </p>
+
+  <h2 id="cookies">Cookies</h2>
+  <p>
+    Histats may place first-party or third-party cookies, or read identifiers already stored by it,
+    to count visits and distinguish returning browsers. This site does not set login, session,
+    shopping or preference cookies of its own.
+  </p>
+  <p>
+    You can delete or block cookies in your browser settings. Blocking requests to
+    <code>s10.histats.com</code> and <code>sstatic1.histats.com</code> stops the tracker from
+    loading. Blocking cookies may also affect how visits are counted, but it does not affect your
+    ability to read this page or download the app.
+  </p>
+
+  <h2 id="logs">Hosting logs</h2>
+  <p>
+    The site is delivered through Cloudflare and GitHub Pages. Those providers may keep standard
+    request logs, including IP address, requested URL, timestamp, user agent, referring page and
+    response status. The logs are used for delivery, security, abuse prevention and troubleshooting.
+  </p>
+  <p>
+    This site does not receive or store those raw logs itself. Retention and access are controlled by
+    the providers under their own policies.
+  </p>
+
+  <h2 id="advertising">Advertising</h2>
+  <p>
+    No advertising code, ad slots or ad networks are active on this site. No advertising cookies are
+    set by this page.
+  </p>
+  <p>
+    If advertising is added later, this policy will be updated before the code is deployed. Where
+    consent is required, a consent mechanism will be added at the same time.
+  </p>
+
+  <h2 id="choices">Your choices</h2>
+  <p>
+    You can limit analytics by blocking third-party scripts, blocking the Histats domains, using
+    your browser’s private browsing mode, or clearing cookies after a visit. Because the site has no
+    accounts, there is no profile to sign into or delete.
+  </p>
+  <p>
+    Depending on where you live, you may have rights to access, correct, delete or object to the
+    processing of personal data. Most of the information described here is aggregated traffic data
+    held by Histats or by the hosting providers. Requests about that data should be directed to the
+    relevant provider. For questions about this page, use the contact details below.
+  </p>
+  <p>
+    The site does not currently respond differently to browser “Do Not Track” signals, because there
+    is no industry-wide standard for interpreting them.
+  </p>
+
+  <h2 id="children">Children</h2>
+  <p>
+    This page is not directed at children under 13 and does not knowingly collect personal
+    information from them. If you believe a child has submitted information through a service linked
+    here, contact the provider of that service.
+  </p>
+
+  <h2 id="changes">Changes</h2>
+  <p>
+    This policy may be updated when the site changes, when a new service is added, or when the law
+    requires it. The date at the top of the page shows the last revision. Material changes will be
+    reflected here before the related feature goes live.
+  </p>
+
+  <h2 id="contact">Contact</h2>
+  <p>
+    Site contact details are published on the <a href="/contact/">contact page</a>. The address shown
+    there is <a href={homeUrl}>{contact}</a>; selecting it returns to the homepage.
+  </p>
+</LegalLayout>

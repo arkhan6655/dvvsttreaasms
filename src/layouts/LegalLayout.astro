@@ -1,0 +1,58 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { siteConfig, homePath, homeUrl, pageTitle, siteRoot } from '../lib/site';
+
+interface Props {
+  title: string;
+  description: string;
+  heading: string;
+  lede?: string;
+  updated: string;
+  sections: { id: string; label: string }[];
+}
+
+const { title, description, heading, lede, updated, sections } = Astro.props;
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: heading,
+    description,
+    url: new URL(Astro.url.pathname, siteRoot).href,
+    isPartOf: {
+      '@type': 'WebSite',
+      name: siteConfig.brand,
+      url: homeUrl,
+    },
+    dateModified: '2026-10-24',
+  },
+];
+---
+
+<BaseLayout title={pageTitle(title)} description={description} schema={schema}>
+  <div class="page-hero">
+    <div class="wrap">
+      <p class="kicker">Legal &amp; site information</p>
+      <h1>{heading}</h1>
+      {lede && <p class="page-hero__lede">{lede}</p>}
+      <p class="page-hero__meta">Last updated · {updated}</p>
+    </div>
+  </div>
+
+  <div class="legal-body">
+    <div class="wrap legal-layout">
+      <div class="prose">
+        <slot />
+        <a class="legal-back" href={homePath}>← Back to the download page</a>
+      </div>
+
+      <aside class="legal-aside" aria-label="On this page">
+        <h2>On this page</h2>
+        <ul>
+          {sections.map((section) => <li><a href={`#${section.id}`}>{section.label}</a></li>)}
+        </ul>
+      </aside>
+    </div>
+  </div>
+</BaseLayout>

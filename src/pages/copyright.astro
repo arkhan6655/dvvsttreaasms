@@ -1,0 +1,82 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { siteConfig, homeUrl } from '../lib/site';
+
+const contact = siteConfig.contactDisplay;
+
+const sections = [
+  { id: 'ownership', label: 'Site content' },
+  { id: 'trademarks', label: 'Trademarks' },
+  { id: 'permitted-use', label: 'Permitted use' },
+  { id: 'reporting', label: 'Reporting infringement' },
+  { id: 'contact', label: 'Contact' },
+];
+---
+
+<LegalLayout
+  title="Copyright"
+  description="Copyright and trademark information for vvstreams.site, and how to report content that infringes your rights."
+  heading="Copyright"
+  lede="Ownership of this page’s content, the limits on reuse, and how to raise a rights complaint."
+  updated="24 October 2026"
+  sections={sections}
+>
+  <h2 id="ownership">Site content</h2>
+  <p>
+    The text, layout, design and original graphics on vvstreams.site are protected by copyright.
+    Unless stated otherwise, they are owned by the operator of this site. The VVStreams name, logo
+    and app artwork belong to their respective owner and are used here to identify the application
+    being described.
+  </p>
+
+  <h2 id="trademarks">Trademarks</h2>
+  <p>
+    Android, Google TV and Google Play are trademarks of Google LLC. Fire TV and Fire OS are
+    trademarks of Amazon.com, Inc. or its affiliates. League, team and competition names are the
+    property of their respective owners.
+  </p>
+  <p>
+    This site is not affiliated with, endorsed by or sponsored by any of those organisations.
+    References are descriptive and do not imply a partnership.
+  </p>
+
+  <h2 id="permitted-use">Permitted use</h2>
+  <p>
+    You may read, link to and quote short excerpts of this page for personal, educational or
+    journalistic purposes, provided the source is credited and the meaning is not changed. You may
+    not republish substantial parts of the page, copy its design wholesale, or present it as your own
+    work without written permission.
+  </p>
+  <p>
+    Automated copying that places unreasonable load on the site is not permitted. Linking to the
+    homepage or to the download section is welcome.
+  </p>
+
+  <h2 id="reporting">Reporting infringement</h2>
+  <p>
+    If you own the rights to material that appears on this site and believe it infringes your
+    copyright, send a notice through the contact details published on the{' '}
+    <a href="/contact/">contact page</a>. Include:
+  </p>
+  <ul>
+    <li>your name, organisation and contact information;</li>
+    <li>a description of the copyrighted work you say is infringed;</li>
+    <li>the exact URL on this site where the material appears;</li>
+    <li>a statement that you believe the use is not authorised by the rights holder, its agent or the law;</li>
+    <li>a statement that the information in your notice is accurate and that you are the rights holder or authorised to act for them.</li>
+  </ul>
+  <p>
+    Notices are reviewed as quickly as practical. Material that is found to infringe will be removed
+    or changed, and the page will be updated where needed. Deliberately false or abusive notices may
+    be rejected.
+  </p>
+  <p>
+    This page does not host the APK file. Complaints about the app itself, or about content shown
+    inside it, should go to the app’s developer or to the service that hosts the file.
+  </p>
+
+  <h2 id="contact">Contact</h2>
+  <p>
+    The published address is <a href={homeUrl}>{contact}</a>. Selecting it returns to the homepage.
+  </p>
+</LegalLayout>

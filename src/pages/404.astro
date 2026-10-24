@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { homePath, siteConfig } from '../lib/site';
+---
+
+<BaseLayout
+  title={`Page not found | ${siteConfig.brand}`}
+  description="The page you requested does not exist. Use the VVStreams download page to get the current APK details."
+  noindex
+  bodyClass="is-dark"
+>
+  <div class="not-found">
+    <div class="wrap not-found__inner">
+      <p class="not-found__code" aria-hidden="true">404</p>
+      <h1>This page went missing</h1>
+      <p>
+        The link may be old, or the page may have moved. The download page is the best place to start
+        — it has the current file details, install steps and device notes.
+      </p>
+      <div class="not-found__actions">
+        <a class="btn btn--primary" href={homePath}>Go to the download page</a>
+        <a class="btn btn--ghost" href={`${homePath}#download`}>Jump to the APK</a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

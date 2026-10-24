@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { homePath, siteConfig } from '../lib/site';
+---
+
+<BaseLayout
+  title={`Redirecting | ${siteConfig.brand}`}
+  description={`Opening the VVStreams download page at ${homePath}.`}
+  noindex
+  bare
+>
+  <Fragment slot="head">
+    <meta http-equiv="refresh" content={`0; url=${homePath}`} />
+  </Fragment>
+
+  <div class="redirect-page">
+    <p>
+      Opening the VVStreams download page. <a href={homePath}>Continue</a>.
+    </p>
+  </div>
+</BaseLayout>
