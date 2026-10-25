@@ -1018,11 +1018,41 @@ summary {
 .table-block table {
   min-width: 600px;
   width: 100%;
+  table-layout: fixed;
 }
 
 .table-block th,
 .table-block td {
   white-space: nowrap;
+  box-sizing: border-box;
+  padding: 8px;
+}
+
+/* Equal-width columns for 7-column table */
+.data-table th,
+.data-table td {
+  width: 14.28%;
+  flex: 0 0 14.28%;
+}
+
+/* Ensure header cells have minimum width */
+.data-table th {
+  min-width: 80px;
+  text-align: left;
+}
+
+/* Mobile: ensure table headers are visible */
+@media (max-width: 768px) {
+  .data-table thead {
+    display: table-header-group;
+  }
+  .data-table tbody tr {
+    display: table-row;
+  }
+  .data-table tbody th,
+  .data-table tbody td {
+    padding: 8px 4px;
+  }
 }
 
 .permission-name {
