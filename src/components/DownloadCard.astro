@@ -4,7 +4,7 @@ import { siteConfig, releaseLabel } from '../lib/site';
 const { apk } = siteConfig;
 const facts = [
   ['Version', apk.version],
-  ['Build', apk.build],
+  ['File type', 'APK'],
   ['File size', apk.sizeLabel],
   ['Minimum Android', `${apk.minAndroid} (API 24)`],
   ['Package', apk.packageName],
@@ -19,8 +19,8 @@ const facts = [
         <p class="download-panel__label">03 / Direct download</p>
         <h2 id="download-title">Download<br />VVStreams APK</h2>
         <p class="download-panel__copy">
-          Version <strong>{apk.version}</strong>, published {releaseLabel}. The button opens the
-          developer’s GitHub release and downloads a {apk.sizeLabel} APK file.
+          Version <strong>{apk.version}</strong>, published {releaseLabel}. The button downloads the
+          {apk.sizeLabel} APK file directly.
         </p>
         <div class="download-actions">
           <a class="btn btn--primary" href={apk.url}>
@@ -43,9 +43,9 @@ const facts = [
       </dl>
 
       <p class="download-panel__note">
-        <strong>Before you continue:</strong> this link leaves vvstreams.site and opens GitHub, which
-        serves the file. If your browser asks you to confirm the download, check that the file name
-        ends in <strong>.apk</strong> before installing. This page does not host or modify the APK.
+        <strong>Before you continue:</strong> the file is served from outside vvstreams.site. If your
+        browser asks you to confirm the download, check that the file name ends in
+        <strong>.apk</strong> before installing.
       </p>
     </div>
   </div>

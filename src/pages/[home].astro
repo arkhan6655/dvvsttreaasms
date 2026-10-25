@@ -85,9 +85,9 @@ const faqSchema = {
             file, the devices it runs on, and what to expect while installing it.
           </p>
           <p>
-            The current release is version {apk.version}, build {apk.build}. It is {apk.sizeLabel},
-            supports Android {apk.minAndroid} and newer, and includes native libraries for four CPU
-            architectures. That covers most modern phones, tablets, TV boxes and emulators.
+            The current release is version {apk.version}. It is {apk.sizeLabel}, supports Android
+            {apk.minAndroid} and newer, and includes native libraries for four CPU architectures. That
+            covers most modern phones, tablets, TV boxes and emulators.
           </p>
           <p>
             This is an independent page. It does not host video, run the app, or control what the
@@ -111,8 +111,8 @@ const faqSchema = {
           <dd>4 ABIs</dd>
         </div>
         <div>
-          <dt>Current build</dt>
-          <dd>{apk.version} / {apk.build}</dd>
+          <dt>Current version</dt>
+          <dd>{apk.version}</dd>
         </div>
       </dl>
     </div>
@@ -244,9 +244,9 @@ const faqSchema = {
         <h3>Android TV, Google TV and Fire TV</h3>
         <p>
           These devices usually need a sideloading tool. Install Downloader from the TV’s app store,
-          allow installs from Downloader, then open the GitHub release page in its built-in browser.
-          The same APK works. A remote is enough to navigate, though a mouse helps with some system
-          dialogs.
+          allow installs from Downloader, then enter the download page address in its built-in
+          browser and use the download button. The same APK works. A remote is enough to navigate,
+          though a mouse helps with some system dialogs.
         </p>
       </div>
     </div>
@@ -263,10 +263,6 @@ const faqSchema = {
         <div>
           <dt>Version</dt>
           <dd>{apk.version}</dd>
-        </div>
-        <div>
-          <dt>Build</dt>
-          <dd>{apk.build}</dd>
         </div>
         <div>
           <dt>File size</dt>
@@ -287,10 +283,9 @@ const faqSchema = {
       </dl>
       <p class="table-note">
         <strong>Architectures:</strong> {apk.architectures}. These values were read from the published
-        file and its manifest before this page was updated: versionName {apk.version}, versionCode
-        {' '}{apk.build}, minSdk 24, and {apk.sizeBytes.toLocaleString('en-GB')} bytes. A new build can
-        appear at the release link at any time, so check the file details your browser shows before
-        installing.
+        file and its manifest before this page was updated: versionName {apk.version}, minSdk 24, and
+        {' '}{apk.sizeBytes.toLocaleString('en-GB')} bytes. A new release can appear at the download
+        link at any time, so check the file details your browser shows before installing.
       </p>
     </div>
   </section>
@@ -339,9 +334,9 @@ const faqSchema = {
           <p>
             APK files sit outside the Play Store review process, so treat every download as
             untrusted until you have checked it. The{' '}
-            <a href="#download">download section on this page</a> points to the developer’s GitHub
-            release. GitHub shows the file name and size before the transfer starts; both should
-            match the details above.
+            <a href="#download">download section on this page</a> points to the developer’s published
+            APK. Your browser shows the file name before the transfer starts and its size as the
+            download begins; both should match the details above.
           </p>
           <p>
             Be careful with pages that wrap an APK in an installer, add “mod” features, or ask you to
@@ -519,11 +514,13 @@ const faqSchema = {
             this page rather than a copy hosted somewhere else.
           </p>
         </div>
-        <dl class="contact-block">
-          <dt>Site contact</dt>
-          <dd><a href={homeUrl}>{contactDisplay}</a></dd>
+        <div class="contact-block">
+          <dl>
+            <dt>Site contact</dt>
+            <dd><a href={homeUrl}>{contactDisplay}</a></dd>
+          </dl>
           <p>Selecting the address returns to the homepage. This site does not operate a contact form.</p>
-        </dl>
+        </div>
       </div>
     </div>
   </section>

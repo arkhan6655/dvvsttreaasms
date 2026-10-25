@@ -46,7 +46,7 @@ Everything editable lives in [`site.config.mjs`](site.config.mjs):
 | --- | --- |
 | `homeSlug` | Homepage path (`/index1/`), canonical, sitemap, schema, nav, footer, root fallback |
 | `apk.url` | The only direct download target on the site |
-| `apk.version`, `apk.build`, `apk.sizeBytes` | Version facts, schema, copy, file-size checks |
+| `apk.version`, `apk.sizeBytes` | Version facts, schema, copy, file-size checks |
 | `apk.releaseDate`, `apk.minAndroid`, `apk.packageName` | Details shown on the homepage |
 | `contactDisplay` | Cosmetic address; every appearance links to the homepage |
 | `analytics.histatsId` | Histats site ID |

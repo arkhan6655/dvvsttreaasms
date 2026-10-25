@@ -5,7 +5,7 @@ export const faqs = [
   },
   {
     q: 'Is VVStreams free to download?',
-    a: 'The APK is completely free to download. You can download the latest version APK on this page and install easily on your any kind of android device. Any account, subscription or regional requirement inside the app is set by the app and its content providers, not by this page.',
+    a: 'The APK is completely free to download. You can download the latest version on this page and install it on any compatible Android device. Any account, subscription or regional requirement inside the app is set by the app and its content providers, not by this page.',
   },
   {
     q: 'What Android version does VVStreams need?',

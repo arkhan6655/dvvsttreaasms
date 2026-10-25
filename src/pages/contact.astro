@@ -19,17 +19,19 @@ const sections = [
   sections={sections}
 >
   <h2 id="contact-details">Contact details</h2>
-  <dl class="contact-block">
-    <dt>Published address</dt>
-    <dd><a href={homeUrl}>{contact}</a></dd>
+  <div class="contact-block">
+    <dl>
+      <dt>Published address</dt>
+      <dd><a href={homeUrl}>{contact}</a></dd>
+    </dl>
     <p>
       Selecting the address opens the homepage. This site does not run a contact form, a mailbox or
       a support desk.
     </p>
-  </dl>
+  </div>
   <p>
     The quickest way to get the current file is to use the download section on the homepage. It
-    links to the developer’s published GitHub release and shows the version and size to expect.
+    links to the developer’s published APK release and shows the version and size to expect.
   </p>
   <p>
     <a class="btn btn--dark" href={`${homePath}#download`}>Go to the download section</a>

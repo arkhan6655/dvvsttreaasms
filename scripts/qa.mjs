@@ -54,6 +54,11 @@ for (const [url, page] of pages) {
   if (/adsbygoogle|pagead2|google_ad_client|adsense/i.test(html)) issue(`${label}: contains ad code`);
   if (/\bofficial\b/i.test(html)) issue(`${label}: contains the word "official"`);
 
+  const withoutApkUrl = html.split(siteConfig.apk.url).join('');
+  if (/github/i.test(withoutApkUrl)) issue(`${label}: mentions GitHub outside the APK link`);
+  if (/versioncode/i.test(html)) issue(`${label}: discloses the version code`);
+  if (/<dt>\s*Build\s*<\/dt>/i.test(html)) issue(`${label}: shows a Build fact row`);
+
   if (!html.includes('s10.histats.com/js15_as.js')) issue(`${label}: Histats script is missing`);
   if (!html.includes(`sstatic1.histats.com/0.gif?${siteConfig.analytics.histatsId}`)) {
     issue(`${label}: Histats noscript pixel is missing`);

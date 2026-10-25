@@ -21,13 +21,11 @@ export const siteConfig = {
   apk: {
     url: 'https://github.com/arkhan66648/VVSTreamsdownload/releases/download/v3.3/VVStreams-3.3.apk',
     version: '3.3',
-    build: '315',
     sizeLabel: '4.76 MB',
     sizeBytes: 4758914,
     releaseDate: '2026-10-24',
     minAndroid: '7.0',
     packageName: 'com.vvstreams.app',
-    sourceUrl: 'https://github.com/arkhan66648/VVSTreamsdownload/releases/tag/v3.3',
     architectures: 'arm64-v8a · armeabi-v7a · x86 · x86_64',
   },
 
