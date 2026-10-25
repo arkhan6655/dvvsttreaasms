@@ -560,6 +560,92 @@ const faqSchema = {
     </div>
   </section>
 
+  <section id="alternatives" class="section">
+    <div class="wrap">
+      <SectionHead
+        num="12"
+        title="App comparisons"
+        lede="How VVStreams compares with other popular Android streaming apps. Note: this site does not host streams; the APK linked here is our own published release."
+      />
+      <p>
+        The following comparison table lists key details for apps that people commonly
+        search for when looking to watch live sports on Android. All data is taken from
+        publicly available information (app listings, manifest reads, release notes).
+        Permissions and capabilities vary by build; always check the APK your device shows.
+      </p>
+      <div class="table-block">
+        <table class="data-table">
+          <caption class="sr-only">Comparison of streaming apps</caption>
+          <thead>
+            <tr>
+              <th scope="col">Feature</th>
+              <th scope="col">VVStreams</th>
+              <th scope="col">HDstreamz</th>
+              <th scope="col">Sportsurge</th>
+              <th scope="col">Hesgoal</th>
+              <th scope="col">Totalsportek</th>
+              <th scope="col">Streameast</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">App size</th>
+              <td>{apk.sizeLabel}</td>
+              <td>~5–8 MB (varies by build)</td>
+              <td>~5–7 MB (varies by build)</td>
+              <td>~5 MB (varies by build)</td>
+              <td>~6 MB (varies by build)</td>
+              <td>~5 MB (varies by build)</td>
+            </tr>
+            <tr>
+              <th scope="row">Minimum Android</th>
+              <td>{apk.minAndroid}+</td>
+              <td>4.1+</td>
+              <td>4.0+</td>
+              <td>4.0+</td>
+              <td>4.0+</td>
+              <td>4.1+</td>
+            </tr>
+            <tr>
+              <th scope="row">API level</th>
+              <td>API {apk.minApi}+</td>
+              <td>~16+</td>
+              <td>~15+</td>
+              <td>~15+</td>
+              <td>~15+</td>
+              <td>~16+</td>
+            </tr>
+            <tr>
+              <th scope="row">Distribution</th>
+              <td>External host (this site)</td>
+              <td>Third‑party site</td>
+              <td>Third‑party site</td>
+              <td>Third‑party site</td>
+              <td>Third‑party site</td>
+              <td>Third‑party site</td>
+            </tr>
+            <tr>
+              <th scope="row">Permissions (key)</th>
+              <td>{permissions.map(p => `<code>${p.name}</code>`).join(', ')}</td>
+              <td>Varies by build</td>
+              <td>Varies by build</td>
+              <td>Varies by build</td>
+              <td>Varies by build</td>
+              <td>Varies by build</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-note">
+        <strong>Disclaimer:</strong> This site publishes the VVStreams APK and explains how to
+        install it. The other apps listed are independent projects; this page does not endorse
+        or guarantee their safety or legality. Permissions and features can change between builds.
+        Always verify the APK file name and size before installing, and use services you are
+        entitled to access.
+      </p>
+    </div>
+  </section>
+
   <section id="rights" class="section">
     <div class="wrap">
       <SectionHead
