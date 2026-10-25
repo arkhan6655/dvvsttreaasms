@@ -342,7 +342,7 @@ const faqSchema = {
               permissions.map((permission) => (
                 <tr>
                   <th scope="row" class="cell-device">
-                    <code>{permission.name}</code>
+                    <span class="permission-name">{permission.name}</span>
                   </th>
                   <td class="cell-note">{permission.detail}</td>
                 </tr>
@@ -352,9 +352,14 @@ const faqSchema = {
         </table>
       </div>
       <p class="table-note">
-        Read from the Android manifest of version {apk.version}. Permissions can change in a later
-        release, so check the list Android shows before you install. The build also permits plain
-        HTTP sources, which some streams still use; prefer HTTPS where a source offers both.
+        <strong>Disclaimer:</strong> This site publishes the VVStreams APK and explains how to
+        install it. The other apps listed are independent projects; this page does not endorse
+        or guarantee their safety or legality. Permissions and features can change between builds.
+        Always verify the APK file name and size before installing, and use services you are
+        entitled to access.
+      </p>
+      <p class="table-note">
+        Permissions shown are from the current VVStreams manifest; other apps vary by build.
       </p>
     </div>
   </section>

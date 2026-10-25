@@ -1012,6 +1012,24 @@ summary {
 
 .table-block {
   border-top: 1px solid var(--line);
+  overflow-x: auto;
+}
+
+.table-block table {
+  min-width: 600px;
+  width: 100%;
+}
+
+.table-block th,
+.table-block td {
+  white-space: nowrap;
+}
+
+.permission-name {
+  color: var(--cream);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.05em;
 }
 
 .data-table {
