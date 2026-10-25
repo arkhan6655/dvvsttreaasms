@@ -1,8 +1,13 @@
 ---
 import LegalLayout from '../layouts/LegalLayout.astro';
-import { siteConfig, homeUrl } from '../lib/site';
+import {
+  siteConfig,
+  homeUrl,
+  renderTemplate,
+  legalUpdatedLabel,
+} from '../lib/site';
 
-const contact = siteConfig.contactDisplay;
+const { appName, contactDisplay: contact } = siteConfig;
 
 const sections = [
   { id: 'purpose', label: 'Purpose' },
@@ -13,16 +18,16 @@ const sections = [
 ---
 
 <LegalLayout
-  title="About"
-  description="About vvstreams.site: an independent download and setup page for the VVStreams Android app."
+  title={siteConfig.pages.about.title}
+  description={renderTemplate(siteConfig.pages.about.description)}
   heading="About this page"
-  lede="A short, independent resource for the VVStreams APK: what it is, what was checked, and how to install it."
-  updated="24 October 2026"
+  lede={`A short, independent resource for the ${appName} APK: what it is, what was checked, and how to install it.`}
+  updated={legalUpdatedLabel}
   sections={sections}
 >
   <h2 id="purpose">Purpose</h2>
   <p>
-    This site exists to make one thing easier: getting the VVStreams Android app onto a phone,
+    This site exists to make one thing easier: getting the {appName} Android app onto a phone,
     tablet or TV without guessing which download button is real. It brings the file details,
     installation steps, device notes and common problems onto a single page.
   </p>

@@ -1,8 +1,14 @@
 ---
 import LegalLayout from '../layouts/LegalLayout.astro';
-import { siteConfig, homeUrl } from '../lib/site';
+import {
+  siteConfig,
+  homeUrl,
+  siteHost,
+  renderTemplate,
+  legalUpdatedLabel,
+} from '../lib/site';
 
-const contact = siteConfig.contactDisplay;
+const { appName, contactDisplay: contact } = siteConfig;
 
 const sections = [
   { id: 'overview', label: 'Overview' },
@@ -18,21 +24,21 @@ const sections = [
 ---
 
 <LegalLayout
-  title="Privacy Policy"
-  description="How vvstreams.site uses Histats analytics, cookies and hosting logs, and what choices visitors have."
+  title={siteConfig.pages.privacy.title}
+  description={renderTemplate(siteConfig.pages.privacy.description)}
   heading="Privacy Policy"
   lede="What is collected when you visit this page, why it is collected, and how to limit it."
-  updated="24 October 2026"
+  updated={legalUpdatedLabel}
   sections={sections}
 >
   <h2 id="overview">Overview</h2>
   <p>
-    This policy explains what happens to information when you use vvstreams.site. The site is a
-    static download and information page for the VVStreams Android app. It has no user accounts, no
+    This policy explains what happens to information when you use {siteHost}. The site is a
+    static download and information page for the {appName} Android app. It has no user accounts, no
     comments, no contact form and no checkout.
   </p>
   <p>
-    The policy covers this website only. It does not cover the VVStreams app itself, the external
+    The policy covers this website only. It does not cover the {appName} app itself, the external
     service that serves the APK, or any service you open from a link on this page. Those services have
     their own privacy policies.
   </p>

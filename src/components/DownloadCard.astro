@@ -1,12 +1,12 @@
 ---
-import { siteConfig, releaseLabel } from '../lib/site';
+import { siteConfig, releaseLabel, siteHost } from '../lib/site';
 
-const { apk } = siteConfig;
+const { apk, appName } = siteConfig;
 const facts = [
   ['Version', apk.version],
   ['File type', 'APK'],
   ['File size', apk.sizeLabel],
-  ['Minimum Android', `${apk.minAndroid} (API 24)`],
+  ['Minimum Android', `${apk.minAndroid} (API ${apk.minApi})`],
   ['Package', apk.packageName],
   ['Released', releaseLabel],
 ];
@@ -17,14 +17,14 @@ const facts = [
     <div class="download-panel">
       <div>
         <p class="download-panel__label">03 / Direct download</p>
-        <h2 id="download-title">Download<br />VVStreams APK</h2>
+        <h2 id="download-title">Download<br />{appName} APK</h2>
         <p class="download-panel__copy">
           Version <strong>{apk.version}</strong>, published {releaseLabel}. The button downloads the
           {apk.sizeLabel} APK file directly.
         </p>
         <div class="download-actions">
           <a class="btn btn--primary" href={apk.url}>
-            Download VVStreams {apk.version} APK
+            Download {appName} {apk.version} APK
             <span class="btn__arrow" aria-hidden="true">↓</span>
           </a>
         </div>
@@ -43,7 +43,7 @@ const facts = [
       </dl>
 
       <p class="download-panel__note">
-        <strong>Before you continue:</strong> the file is served from outside vvstreams.site. If your
+        <strong>Before you continue:</strong> the file is served from outside {siteHost}. If your
         browser asks you to confirm the download, check that the file name ends in
         <strong>.apk</strong> before installing.
       </p>

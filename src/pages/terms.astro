@@ -1,8 +1,14 @@
 ---
 import LegalLayout from '../layouts/LegalLayout.astro';
-import { siteConfig, homeUrl } from '../lib/site';
+import {
+  siteConfig,
+  homeUrl,
+  siteHost,
+  renderTemplate,
+  legalUpdatedLabel,
+} from '../lib/site';
 
-const contact = siteConfig.contactDisplay;
+const { appName, contactDisplay: contact } = siteConfig;
 
 const sections = [
   { id: 'acceptance', label: 'Acceptance' },
@@ -18,23 +24,23 @@ const sections = [
 ---
 
 <LegalLayout
-  title="Terms of Use"
-  description="The terms that apply when you use vvstreams.site, including the APK download, acceptable use and liability."
+  title={siteConfig.pages.terms.title}
+  description={renderTemplate(siteConfig.pages.terms.description)}
   heading="Terms of Use"
   lede="The rules for using this page and the download it provides."
-  updated="24 October 2026"
+  updated={legalUpdatedLabel}
   sections={sections}
 >
   <h2 id="acceptance">Acceptance</h2>
   <p>
-    By using vvstreams.site, you agree to these terms. If you do not agree, stop using the site. If
+    By using {siteHost}, you agree to these terms. If you do not agree, stop using the site. If
     you use the site on behalf of an organisation, you confirm that you have authority to accept
     these terms for it.
   </p>
 
   <h2 id="the-site">What this site is</h2>
   <p>
-    This is an independent information and download page for the VVStreams Android application. It
+    This is an independent information and download page for the {appName} Android application. It
     is not the app, the app’s developer, a broadcaster, a league, or a streaming service. The site
     provides file details, installation notes and links to a release hosted elsewhere.
   </p>

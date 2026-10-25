@@ -36,6 +36,9 @@ jobs:
       - name: Build site
         run: npm run build
 
+      - name: QA checks
+        run: npm run qa
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

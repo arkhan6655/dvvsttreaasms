@@ -5,9 +5,7 @@ import Ticker from '../components/Ticker.astro';
 import SectionHead from '../components/SectionHead.astro';
 import DownloadCard from '../components/DownloadCard.astro';
 import FaqList from '../components/FaqList.astro';
-import { sports } from '../data/sports';
-import { deviceRows } from '../data/devices';
-import { faqs } from '../data/faqs';
+import { sports, deviceRows, faqs } from '../lib/site';
 import {
   siteConfig,
   homePath,
@@ -15,23 +13,40 @@ import {
   homeDescription,
   ogImage,
   releaseLabel,
+  apkFileName,
 } from '../lib/site';
 
 export function getStaticPaths() {
   return [{ params: { home: siteConfig.homeSlug } }];
 }
 
-const { apk, brand, contactDisplay } = siteConfig;
+const { apk, brand, contactDisplay, appName } = siteConfig;
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${homeUrl}#website`,
+  name: brand,
+  alternateName: appName,
+  url: homeUrl,
+  inLanguage: siteConfig.locale,
+  publisher: {
+    '@type': 'Organization',
+    name: brand,
+    url: homeUrl,
+  },
+};
 
 const softwareSchema = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
+  '@id': `${homeUrl}#app`,
   name: brand,
-  alternateName: 'VVStreams',
+  alternateName: appName,
   applicationCategory: 'MultimediaApplication',
-  operatingSystem: 'Android 7.0+',
+  operatingSystem: `Android ${apk.minAndroid}+`,
   softwareVersion: apk.version,
-  softwareRequirements: 'Android 7.0 (API 24) or newer',
+  softwareRequirements: `Android ${apk.minAndroid} (API ${apk.minApi}) or newer`,
   fileSize: `${apk.sizeBytes} bytes`,
   downloadUrl: apk.url,
   datePublished: apk.releaseDate,
@@ -47,6 +62,7 @@ const softwareSchema = {
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
+  '@id': `${homeUrl}#faq`,
   mainEntity: faqs.map((faq) => ({
     '@type': 'Question',
     name: faq.q,
@@ -62,7 +78,7 @@ const faqSchema = {
   title={siteConfig.seoTitle}
   description={homeDescription}
   canonicalPath={homePath}
-  schema={[softwareSchema, faqSchema]}
+  schema={[websiteSchema, softwareSchema, faqSchema]}
 >
   <Hero />
   <Ticker />
@@ -71,7 +87,7 @@ const faqSchema = {
     <div class="wrap">
       <SectionHead
         num="01"
-        title="What VVStreams is"
+        title={`What ${appName} is`}
         lede="A compact Android app for following live sport, with the file details, install steps and limits set out before you download."
       />
       <div class="overview">
@@ -80,13 +96,13 @@ const faqSchema = {
         </p>
         <div class="overview__copy">
           <p>
-            VVStreams is an Android app for following live sports. It is distributed as a single
+            {appName} is an Android app for following live sports. It is distributed as a single
             APK rather than through the Play Store, which is why this page exists: to explain the
             file, the devices it runs on, and what to expect while installing it.
           </p>
           <p>
             The current release is version {apk.version}. It is {apk.sizeLabel}, supports Android
-            {apk.minAndroid} and newer, and includes native libraries for four CPU architectures. That
+            {apk.minAndroid} and newer, and includes native libraries for {apk.architectures.count} CPU architectures. That
             covers most modern phones, tablets, TV boxes and emulators.
           </p>
           <p>
@@ -158,7 +174,7 @@ const faqSchema = {
       />
       <div class="table-block">
         <table class="data-table">
-          <caption class="sr-only">VVStreams device compatibility</caption>
+          <caption class="sr-only">{appName} device compatibility</caption>
           <thead>
             <tr>
               <th scope="col">Device</th>
@@ -226,7 +242,7 @@ const faqSchema = {
           <span class="steps__num">Step 03</span>
           <h3>Open and confirm</h3>
           <p>
-            Find <strong>VVStreams-{apk.version}.apk</strong> in your Downloads folder, tap it, review
+            Find <strong>{apkFileName}</strong> in your Downloads folder, tap it, review
             the permissions shown, and choose Install.
           </p>
         </li>
@@ -234,7 +250,7 @@ const faqSchema = {
           <span class="steps__num">Step 04</span>
           <h3>Launch the app</h3>
           <p>
-            Open VVStreams from the app drawer. If Play Protect shows a warning for an app it does
+            Open {appName} from the app drawer. If Play Protect shows a warning for an app it does
             not recognise, read it before deciding whether to continue.
           </p>
         </li>
@@ -270,7 +286,7 @@ const faqSchema = {
         </div>
         <div>
           <dt>Minimum Android</dt>
-          <dd>{apk.minAndroid} / API 24</dd>
+          <dd>{apk.minAndroid} / API {apk.minApi}</dd>
         </div>
         <div>
           <dt>Package</dt>
@@ -283,7 +299,7 @@ const faqSchema = {
       </dl>
       <p class="table-note">
         <strong>Architectures:</strong> {apk.architectures}. These values were read from the published
-        file and its manifest before this page was updated: versionName {apk.version}, minSdk 24, and
+        file and its manifest before this page was updated: versionName {apk.version}, minSdk {apk.minApi}, and
         {' '}{apk.sizeBytes.toLocaleString('en-GB')} bytes. A new release can appear at the download
         link at any time, so check the file details your browser shows before installing.
       </p>
@@ -301,7 +317,7 @@ const faqSchema = {
         <article class="prose">
           <h3 id="what-it-is">What the app is built for</h3>
           <p>
-            VVStreams is aimed at people who follow several sports and want one Android app instead
+            {appName} is aimed at people who follow several sports and want one Android app instead
             of a folder of bookmarks. The interface is built around sports categories, with scores,
             schedules and match information gathered in one place. It is not a general-purpose video
             player, and it does not replace a paid broadcaster.
@@ -317,7 +333,7 @@ const faqSchema = {
           <p>Three checks take less than a minute and prevent most failed installs:</p>
           <ul>
             <li>
-              <strong>Android version.</strong> You need Android {apk.minAndroid} (API 24) or newer.
+              <strong>Android version.</strong> You need Android {apk.minAndroid} (API {apk.minApi}) or newer.
               Older devices will refuse the package.
             </li>
             <li>
@@ -356,7 +372,7 @@ const faqSchema = {
             <li>Open the app from the app drawer once the installer finishes.</li>
           </ol>
           <p>
-            If you already have an older VVStreams build, installing the new APK over it usually
+            If you already have an older {appName} build, installing the new APK over it usually
             keeps your data. Android only allows that when the package name and signing identity
             match. If they do not, the installer will ask you to remove the old copy first.
           </p>
@@ -465,7 +481,7 @@ const faqSchema = {
         <div class="card card--accent">
           <h3>Content and rights</h3>
           <p>
-            VVStreams is a client application. This page does not host, store or transmit video.
+            {appName} is a client application. This page does not host, store or transmit video.
             Broadcast rights are territorial and change over time.
           </p>
           <p>
@@ -500,7 +516,7 @@ const faqSchema = {
       <div class="about-grid">
         <div>
           <p>
-            {brand} is an independent information and download page for the VVStreams Android
+            {brand} is an independent information and download page for the {appName} Android
             application. It is maintained separately from the app’s developer and is not operated,
             endorsed or sponsored by any league, team, broadcaster or streaming service.
           </p>

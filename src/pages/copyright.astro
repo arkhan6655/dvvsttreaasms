@@ -1,8 +1,14 @@
 ---
 import LegalLayout from '../layouts/LegalLayout.astro';
-import { siteConfig, homeUrl } from '../lib/site';
+import {
+  siteConfig,
+  homeUrl,
+  siteHost,
+  renderTemplate,
+  legalUpdatedLabel,
+} from '../lib/site';
 
-const contact = siteConfig.contactDisplay;
+const { appName, contactDisplay: contact } = siteConfig;
 
 const sections = [
   { id: 'ownership', label: 'Site content' },
@@ -14,17 +20,17 @@ const sections = [
 ---
 
 <LegalLayout
-  title="Copyright"
-  description="Copyright and trademark information for vvstreams.site, and how to report content that infringes your rights."
+  title={siteConfig.pages.copyright.title}
+  description={renderTemplate(siteConfig.pages.copyright.description)}
   heading="Copyright"
   lede="Ownership of this page’s content, the limits on reuse, and how to raise a rights complaint."
-  updated="24 October 2026"
+  updated={legalUpdatedLabel}
   sections={sections}
 >
   <h2 id="ownership">Site content</h2>
   <p>
-    The text, layout, design and original graphics on vvstreams.site are protected by copyright.
-    Unless stated otherwise, they are owned by the operator of this site. The VVStreams name, logo
+    The text, layout, design and original graphics on {siteHost} are protected by copyright.
+    Unless stated otherwise, they are owned by the operator of this site. The {appName} name, logo
     and app artwork belong to their respective owner and are used here to identify the application
     being described.
   </p>

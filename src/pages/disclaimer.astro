@@ -1,8 +1,14 @@
 ---
 import LegalLayout from '../layouts/LegalLayout.astro';
-import { siteConfig, homeUrl } from '../lib/site';
+import {
+  siteConfig,
+  homeUrl,
+  siteHost,
+  renderTemplate,
+  legalUpdatedLabel,
+} from '../lib/site';
 
-const contact = siteConfig.contactDisplay;
+const { appName, contactDisplay: contact } = siteConfig;
 
 const sections = [
   { id: 'independence', label: 'Independence' },
@@ -15,16 +21,16 @@ const sections = [
 ---
 
 <LegalLayout
-  title="Disclaimer"
-  description="VVStreams.site is an independent download page. It is not affiliated with any league, team, broadcaster or streaming service."
+  title={siteConfig.pages.disclaimer.title}
+  description={renderTemplate(siteConfig.pages.disclaimer.description)}
   heading="Disclaimer"
   lede="What this page is, what it is not, and the limits that apply to the information here."
-  updated="24 October 2026"
+  updated={legalUpdatedLabel}
   sections={sections}
 >
   <h2 id="independence">Independence</h2>
   <p>
-    vvstreams.site is an independent information and download page for the VVStreams Android
+    {siteHost} is an independent information and download page for the {appName} Android
     application. It is not operated, endorsed, sponsored or approved by any league, team, club,
     broadcaster, streaming platform, or by the app’s developer.
   </p>

@@ -1,6 +1,12 @@
 ---
 import LegalLayout from '../layouts/LegalLayout.astro';
-import { siteConfig, homePath, homeUrl } from '../lib/site';
+import {
+  siteConfig,
+  homePath,
+  homeUrl,
+  renderTemplate,
+  legalUpdatedLabel,
+} from '../lib/site';
 
 const contact = siteConfig.contactDisplay;
 
@@ -11,11 +17,11 @@ const sections = [
 ---
 
 <LegalLayout
-  title="Contact"
-  description="Contact details for vvstreams.site. The published address links back to the configured homepage."
+  title={siteConfig.pages.contact.title}
+  description={renderTemplate(siteConfig.pages.contact.description)}
   heading="Contact"
   lede="The site’s published address, and what it can and cannot be used for."
-  updated="24 October 2026"
+  updated={legalUpdatedLabel}
   sections={sections}
 >
   <h2 id="contact-details">Contact details</h2>

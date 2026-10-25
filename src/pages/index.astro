@@ -5,7 +5,7 @@ import { homePath, siteConfig } from '../lib/site';
 
 <BaseLayout
   title={`Redirecting | ${siteConfig.brand}`}
-  description={`Opening the VVStreams download page at ${homePath}.`}
+  description={`Opening the ${siteConfig.appName} download page at ${homePath}.`}
   noindex
   bare
 >
@@ -15,7 +15,7 @@ import { homePath, siteConfig } from '../lib/site';
 
   <div class="redirect-page">
     <p>
-      Opening the VVStreams download page. <a href={homePath}>Continue</a>.
+      Opening the {siteConfig.appName} download page. <a href={homePath}>Continue</a>.
     </p>
   </div>
 </BaseLayout>

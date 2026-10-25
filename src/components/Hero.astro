@@ -3,11 +3,11 @@ import { Image } from 'astro:assets';
 import logo from '../assets/vvstreams-logo-640.webp';
 import { siteConfig, releaseLabel } from '../lib/site';
 
-const { brand, tagline, apk } = siteConfig;
+const { brand, appName, tagline, apk } = siteConfig;
 const rows = [
   ['Version', apk.version],
   ['File size', apk.sizeLabel],
-  ['Minimum Android', `${apk.minAndroid} (API 24)`],
+  ['Minimum Android', `${apk.minAndroid} (API ${apk.minApi})`],
   ['Package', apk.packageName],
   ['Released', releaseLabel],
 ];
@@ -18,7 +18,7 @@ const rows = [
     <div>
       <p class="kicker">Android · Mobile &amp; TV</p>
       <h1 id="page-title">
-        <span>VVStreams</span>
+        <span>{appName}</span>
         <span class="accent">Download</span>
       </h1>
       <p class="hero__tagline">{tagline}.</p>
