@@ -45,34 +45,30 @@ const sections = [
 
   <h2 id="analytics">Analytics and Histats</h2>
   <p>
-    This site loads Histats, a third-party web statistics service, on every page. The Histats site
-    ID used here is <strong>{siteConfig.analytics.histatsId}</strong>. The script runs for every
-    visitor and is not placed behind a consent banner or a delayed loader.
+    This site uses Histats, a third-party web statistics service, to count visits. The Histats site
+    ID used here is <strong>{siteConfig.analytics.histatsId}</strong>. The script is not loaded when
+    you first arrive: a banner asks whether you allow analytics, and no request is made to Histats
+    until you accept.
   </p>
   <p>
-    Histats records page views and visit information. That can include your IP address, approximate
-    location derived from it, browser and device type, operating system, referring page, the pages
-    you open and the time of the visit. Histats may also set cookies or similar identifiers in your
-    browser. The reports are used to understand traffic, see which pages are useful and keep the
-    site working.
+    If you allow analytics, Histats records page views and visit information. That can include your
+    IP address, approximate location derived from it, browser and device type, operating system,
+    referring page, the pages you open and the time of the visit. Histats may also set cookies or
+    similar identifiers in your browser. The reports are used to understand traffic, see which pages
+    are useful and keep the site working.
   </p>
   <p>
-    Histats is an independent service. Its own privacy policy and retention practices apply to the
-    data it receives. This site does not combine Histats data with any other information and does
-    not use it to identify you by name.
+    Histats is a third-party service. Its own privacy policy and retention practices apply to the
+    data it receives. This site does not combine Histats data with any other information and does not
+    use it to identify you by name.
   </p>
 
   <h2 id="cookies">Cookies</h2>
   <p>
-    Histats may place first-party or third-party cookies, or read identifiers already stored by it,
-    to count visits and distinguish returning browsers. This site does not set login, session,
-    shopping or preference cookies of its own.
-  </p>
-  <p>
-    You can delete or block cookies in your browser settings. Blocking requests to
-    <code>s10.histats.com</code> and <code>sstatic1.histats.com</code> stops the tracker from
-    loading. Blocking cookies may also affect how visits are counted, but it does not affect your
-    ability to read this page or download the app.
+    Before you allow analytics, this site sets no cookies of its own. If you allow it, Histats may
+    place first-party or third-party cookies, or read identifiers already stored by it, to count
+    visits and distinguish returning browsers. This site does not set login, session, shopping or
+    preference cookies of its own.
   </p>
 
   <h2 id="logs">Hosting logs</h2>
@@ -89,19 +85,20 @@ const sections = [
 
   <h2 id="advertising">Advertising</h2>
   <p>
-    No advertising code, ad slots or ad networks are active on this site. No advertising cookies are
-    set by this page.
+    No advertising code, ad slots or ad networks are active on this website. No advertising cookies
+    are set by this page.
   </p>
   <p>
-    If advertising is added later, this policy will be updated before the code is deployed. Where
-    consent is required, a consent mechanism will be added at the same time.
+    This policy covers the website only. The app is a separate product. It declares
+    advertising-related permissions, which are listed on the homepage, and those are governed by the
+    app and the libraries it includes rather than by this page.
   </p>
 
   <h2 id="choices">Your choices</h2>
   <p>
-    You can limit analytics by blocking third-party scripts, blocking the Histats domains, using
-    your browser’s private browsing mode, or clearing cookies after a visit. Because the site has no
-    accounts, there is no profile to sign into or delete.
+    Analytics is opt-in. Declining, closing the banner or blocking third-party scripts means no
+    Histats request is made from your browser. You can also use private browsing or clear cookies
+    after a visit. Because the site has no accounts, there is no profile to sign into or delete.
   </p>
   <p>
     Depending on where you live, you may have rights to access, correct, delete or object to the
@@ -111,7 +108,7 @@ const sections = [
   </p>
   <p>
     The site does not currently respond differently to browser “Do Not Track” signals, because there
-    is no industry-wide standard for interpreting them.
+    is no industry-wide standard for interpreting them. Analytics stays off unless you allow it.
   </p>
 
   <h2 id="children">Children</h2>

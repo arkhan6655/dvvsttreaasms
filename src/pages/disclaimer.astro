@@ -11,8 +11,8 @@ import {
 const { appName, contactDisplay: contact } = siteConfig;
 
 const sections = [
-  { id: 'independence', label: 'Independence' },
-  { id: 'no-streams', label: 'No streams or video' },
+  { id: 'publisher', label: 'Publisher' },
+  { id: 'no-video', label: 'No video on this site' },
   { id: 'availability', label: 'Availability and rights' },
   { id: 'installation-risk', label: 'Installation risk' },
   { id: 'external-links', label: 'External links' },
@@ -28,33 +28,34 @@ const sections = [
   updated={legalUpdatedLabel}
   sections={sections}
 >
-  <h2 id="independence">Independence</h2>
+  <h2 id="publisher">Publisher</h2>
   <p>
-    {siteHost} is an independent information and download page for the {appName} Android
-    application. It is not operated, endorsed, sponsored or approved by any league, team, club,
-    broadcaster, streaming platform, or by the app’s developer.
+    {siteHost} is the download page for the {appName} Android app, run by its publisher. The site
+    is not operated, endorsed, sponsored or approved by any league, team, club, broadcaster or
+    streaming platform.
   </p>
   <p>
     Team names, competition names, trademarks and logos belong to their respective owners. Any
     reference on this site is descriptive and does not imply affiliation or endorsement.
   </p>
 
-  <h2 id="no-streams">No streams or video</h2>
+  <h2 id="no-video">No video on this site</h2>
   <p>
-    This page does not host, store, transmit or provide access to live video, recorded video,
-    channels or feeds. It does not sell subscriptions, accounts or access codes. It links to an APK
-    published by the app’s developer and explains how to install it.
+    This website does not host, store, transmit or provide access to live video, recorded video,
+    channels or feeds. It does not sell subscriptions, accounts or access codes. It publishes the
+    APK we build and explains how to install it.
   </p>
   <p>
-    Descriptions of sports categories refer to how the app is organised, not to a promise that a
-    particular match, competition or channel is available.
+    What plays inside the app comes from the sources the app opens. Descriptions of sports
+    categories refer to how the app is organised, not to a promise that a particular match,
+    competition or channel is available.
   </p>
 
   <h2 id="availability">Availability and rights</h2>
   <p>
     Broadcast rights are territorial and time-limited. An event available in one country may not be
-    available in another, and schedules change without notice. Availability inside the app depends on
-    the developer, the content providers and your region.
+    available in another, and schedules change without notice. Availability inside the app depends
+    on the providers behind each stream and on your region.
   </p>
   <p>
     You are responsible for using the app only for content you are entitled to access and for
@@ -65,7 +66,7 @@ const sections = [
   <h2 id="installation-risk">Installation risk</h2>
   <p>
     Installing an Android APK from outside an app store carries risk. Files can be modified,
-    replaced, or bundled with unwanted software. Download from the release linked on this page,
+    replaced, or bundled with unwanted software. Download from the file linked on this page,
     compare the file details shown by your browser, review the permissions Android lists, and use
     your own security tools if you are unsure.
   </p>
@@ -85,6 +86,7 @@ const sections = [
   <h2 id="contact">Contact</h2>
   <p>
     Published site details are on the <a href="/contact/">contact page</a>. The address shown there
-    is <a href={homeUrl}>{contact}</a>; selecting it returns to the homepage.
+    is <a href={homeUrl}>{contact}</a>; selecting it returns to the homepage. For rights matters,
+    use the <a href="/dmca/">DMCA and takedown page</a>.
   </p>
 </LegalLayout>

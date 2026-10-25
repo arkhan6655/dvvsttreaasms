@@ -15,7 +15,7 @@ const anchor = (hash: string) => `${homePath}#${hash}`;
         <Image src={logo} width={92} height={92} alt="" loading="lazy" decoding="async" />
         <div>
           <a class="footer-brand__name" href={homePath}>{brand}</a>
-          <p>{tagline}. Independent download and setup page. Not affiliated with any league, team, broadcaster or streaming provider.</p>
+          <p>{tagline}. Download page and release notes. Not affiliated with any league, team, broadcaster or streaming service.</p>
         </div>
       </div>
 
@@ -37,7 +37,11 @@ const anchor = (hash: string) => `${homePath}#${hash}`;
 
     <div class="footer-bottom">
       <p>© {year} {brand}. Android is a trademark of Google LLC.</p>
-      <p><a href={homeUrl}>{contactDisplay}</a></p>
+      <p>
+        <a href={homeUrl}>{contactDisplay}</a>
+        {' · '}
+        <button type="button" class="footer-consent" data-consent-reset>Cookie settings</button>
+      </p>
     </div>
   </div>
 </footer>

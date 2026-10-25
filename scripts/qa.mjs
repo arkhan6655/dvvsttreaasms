@@ -79,13 +79,15 @@ for (const [url, page] of pages) {
     if (/<dt>\s*Build\s*<\/dt>/i.test(html)) issue(`${label}: shows a Build fact row`);
 
     if (siteConfig.analytics.histatsEnabled) {
-      if (!html.includes('s10.histats.com/js15_as.js')) issue(`${label}: Histats script is missing`);
-      if (!html.includes(`sstatic1.histats.com/0.gif?${siteConfig.analytics.histatsId}`)) {
-        issue(`${label}: Histats noscript pixel is missing`);
+      if (!html.includes('data-consent')) issue(`${label}: consent banner is missing`);
+      if (!html.includes('s10.histats.com/js15_as.js')) issue(`${label}: Histats loader is missing`);
+      if (!html.includes('vv-consent')) issue(`${label}: consent choice is not stored`);
+      if (html.includes('sstatic1.histats.com')) {
+        issue(`${label}: loads a Histats pixel without consent`);
       }
       const histatsAt = html.indexOf('js15_as.js');
       if (histatsAt >= 0 && histatsAt < html.length * 0.75) {
-        issue(`${label}: Histats is not near the end of the document`);
+        issue(`${label}: Histats loader is not near the end of the document`);
       }
     }
 

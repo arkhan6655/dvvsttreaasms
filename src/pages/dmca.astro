@@ -1,0 +1,122 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import {
+  siteConfig,
+  homeUrl,
+  siteHost,
+  renderTemplate,
+  legalUpdatedLabel,
+} from '../lib/site';
+
+const { appName, contactDisplay: contact } = siteConfig;
+
+const sections = [
+  { id: 'scope', label: 'What this covers' },
+  { id: 'notice', label: 'Sending a notice' },
+  { id: 'where', label: 'Where to send it' },
+  { id: 'counter', label: 'Counter-notice' },
+  { id: 'repeat', label: 'Repeat notices' },
+  { id: 'notes', label: 'Notes' },
+];
+---
+
+<LegalLayout
+  title={siteConfig.pages.dmca.title}
+  description={renderTemplate(siteConfig.pages.dmca.description)}
+  heading="DMCA and takedown"
+  lede="How to report material you believe infringes your rights, what a notice must contain, and how it is handled."
+  updated={legalUpdatedLabel}
+  sections={sections}
+>
+  <h2 id="scope">What this covers</h2>
+  <p>
+    This page explains how {siteHost} handles copyright complaints about the website and about the
+    {appName} release it publishes. The website itself does not host, store or transmit video. The
+    APK is served by an external download host, and that host accepts notices about the file
+    directly as well.
+  </p>
+  <p>
+    A notice about a specific stream or broadcast should identify the material clearly. Availability
+    of a stream inside the app varies by region, and this page cannot confirm what a particular
+    source will show.
+  </p>
+
+  <h2 id="notice">Sending a notice</h2>
+  <p>
+    If you believe material on this site or in the published release infringes your copyright, send
+    a written notice that includes all of the following:
+  </p>
+  <ul>
+    <li>
+      a physical or electronic signature of the copyright owner or a person authorised to act for
+      them;
+    </li>
+    <li>identification of the copyrighted work you say has been infringed, or a representative list of works;</li>
+    <li>
+      enough information to locate the material: the exact URL on this site, or the app version and
+      package name if the complaint is about the release;
+    </li>
+    <li>your name, address, telephone number and email address;</li>
+    <li>
+      a statement that you have a good-faith belief that the use is not authorised by the copyright
+      owner, its agent or the law;
+    </li>
+    <li>
+      a statement, under penalty of perjury, that the information in the notice is accurate and that
+      you are the copyright owner or are authorised to act for them.
+    </li>
+  </ul>
+  <p>
+    Notices that omit these elements may be returned so they can be completed. Deliberately false or
+    abusive notices may be rejected.
+  </p>
+
+  <h2 id="where">Where to send it</h2>
+  <p>
+    Send notices to the address published on the <a href="/contact/">contact page</a>:{' '}
+    <a href={homeUrl}>{contact}</a>. Put “DMCA notice” in the subject line and include the URL or
+    version you are writing about.
+  </p>
+  <p>
+    The external host that serves the APK also runs its own complaint process. Contacting that host
+    as well is usually the fastest way to have a specific file reviewed, because it can act on the
+    file directly.
+  </p>
+
+  <h2 id="counter">Counter-notice</h2>
+  <p>
+    If material was removed and you believe it was removed by mistake or misidentification, you can
+    send a counter-notice. It should include:
+  </p>
+  <ul>
+    <li>your physical or electronic signature;</li>
+    <li>identification of the material that was removed and where it appeared before removal;</li>
+    <li>
+      a statement, under penalty of perjury, that you have a good-faith belief the material was
+      removed by mistake or misidentification;
+    </li>
+    <li>your name, address and telephone number, and consent to the jurisdiction of a competent court;</li>
+    <li>a statement that you will accept service of process from the person who sent the original notice.</li>
+  </ul>
+  <p>
+    A counter-notice is reviewed on the same basis as a notice. Where the law allows, material may be
+    restored if the original complainant does not take further action.
+  </p>
+
+  <h2 id="repeat">Repeat notices</h2>
+  <p>
+    Notices are recorded. If the same source or file is the subject of repeated valid notices, the
+    related material can be removed and further publication of that build can be declined.
+  </p>
+
+  <h2 id="notes">Notes</h2>
+  <p>
+    This page describes the process in plain language. It is not legal advice, and it does not
+    replace the requirements of the Digital Millennium Copyright Act or any other law that applies
+    to you.
+  </p>
+  <p>
+    For general copyright and trademark information, see the <a href="/copyright/">copyright page</a>.
+    For anything else, use the <a href="/contact/">contact page</a>.
+  </p>
+</LegalLayout>

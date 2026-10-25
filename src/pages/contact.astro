@@ -12,6 +12,8 @@ const contact = siteConfig.contactDisplay;
 
 const sections = [
   { id: 'contact-details', label: 'Contact details' },
+  { id: 'download-problems', label: 'Download problems' },
+  { id: 'rights', label: 'Rights complaints' },
   { id: 'limits', label: 'What this page is not' },
 ];
 ---
@@ -20,7 +22,7 @@ const sections = [
   title={siteConfig.pages.contact.title}
   description={renderTemplate(siteConfig.pages.contact.description)}
   heading="Contact"
-  lede="The site’s published address, and what it can and cannot be used for."
+  lede="The site’s published address, what it is for, and where rights complaints go."
   updated={legalUpdatedLabel}
   sections={sections}
 >
@@ -31,24 +33,37 @@ const sections = [
       <dd><a href={homeUrl}>{contact}</a></dd>
     </dl>
     <p>
-      Selecting the address opens the homepage. This site does not run a contact form, a mailbox or
-      a support desk.
+      Selecting the address opens the homepage. This page does not run a contact form or a support
+      desk.
     </p>
   </div>
   <p>
     The quickest way to get the current file is to use the download section on the homepage. It
-    links to the developer’s published APK release and shows the version and size to expect.
+    links to the APK we publish and shows the version, size and permissions to expect.
   </p>
   <p>
     <a class="btn btn--dark" href={`${homePath}#download`}>Go to the download section</a>
   </p>
 
+  <h2 id="download-problems">Download problems</h2>
+  <p>
+    Use the published address if a download looks wrong: the file name is unexpected, the size does
+    not match the details on the homepage, an installer tries to run, or a page asks you for
+    payment. Say which browser and device you used, and do not install a file that looks tampered
+    with.
+  </p>
+
+  <h2 id="rights">Rights complaints</h2>
+  <p>
+    Copyright and rights notices are handled through the <a href="/dmca/">DMCA and takedown page</a>.
+    That page lists what a notice needs to include and explains where to send it.
+  </p>
+
   <h2 id="limits">What this page is not</h2>
   <p>
-    This site is an independent information and download page. It does not provide technical support
-    for the app, sell subscriptions, host video, or control what the app shows. Questions about the
-    app itself, playback, accounts or content should go to the app’s developer or to the service you
-    are using.
+    This site publishes the {siteConfig.appName} APK and its release notes. It is not a broadcaster,
+    does not sell subscriptions, and cannot change what the app shows. Questions about playback,
+    accounts or what is available inside the app are outside what this page can answer.
   </p>
   <p>
     For legal or rights matters, see the <a href="/copyright/">copyright page</a> and the{' '}

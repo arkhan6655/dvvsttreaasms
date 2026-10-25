@@ -19,8 +19,8 @@ const facts = [
         <p class="download-panel__label">03 / Direct download</p>
         <h2 id="download-title">Download<br />{appName} APK</h2>
         <p class="download-panel__copy">
-          Version <strong>{apk.version}</strong>, published {releaseLabel}. The button downloads the
-          {apk.sizeLabel} APK file directly.
+          Version <strong>{apk.version}</strong>, published {releaseLabel}. The button opens the
+          {apk.sizeLabel} APK file on our download host.
         </p>
         <div class="download-actions">
           <a class="btn btn--primary" href={apk.url}>
@@ -43,9 +43,10 @@ const facts = [
       </dl>
 
       <p class="download-panel__note">
-        <strong>Before you continue:</strong> the file is served from outside {siteHost}. If your
-        browser asks you to confirm the download, check that the file name ends in
-        <strong>.apk</strong> before installing.
+        <strong>Before you continue:</strong> we publish this release; the file itself is served by
+        an external download host, not from {siteHost}. Check that the file name ends in
+        <strong>.apk</strong> and that the size matches <strong>{apk.sizeLabel}</strong>. If
+        something is wrong with the download, <a href="/contact/">tell us</a>.
       </p>
     </div>
   </div>

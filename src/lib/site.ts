@@ -48,6 +48,26 @@ export const deviceRows = siteConfig.content.devices.map((row) => ({
   note: renderTemplate(row.note),
 }));
 
+const releaseDate = new Intl.DateTimeFormat('en-GB', {
+  day: 'numeric',
+  month: 'short',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
+
+export const releases = siteConfig.releases.map((release) => ({
+  ...release,
+  notes: release.notes.map(renderTemplate),
+  dateLabel: releaseDate.format(new Date(`${release.date}T00:00:00Z`)),
+}));
+
+export const permissions = siteConfig.apk.permissions.map((permission) => ({
+  ...permission,
+  detail: renderTemplate(permission.detail),
+}));
+
+export const publisher = siteConfig.publisher;
+
 export const sports = siteConfig.content.sports.map((sport) => ({
   ...sport,
   descriptor: renderTemplate(sport.descriptor),

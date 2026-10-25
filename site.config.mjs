@@ -19,7 +19,7 @@ export const siteConfig = {
   seoTitle: 'VVStreams Download',
   titleTemplate: '%s | {brand}',
   descriptionTemplate:
-    'Download the {appName} {version} APK for Android mobile and TV. {sizeLabel}, Android {minAndroid}+, with install steps, device support and answers to common questions.',
+    'Download the {appName} {version} APK for Android mobile and TV. {sizeLabel}, Android {minAndroid}+, with install steps, device support, app permissions and answers to common questions.',
   ogImageAltTemplate: '{appName} Download — APK {version} for Android mobile and TV',
   ogImagePath: '/og/vvstreams-app.jpg',
   ogImageWidth: 1200,
@@ -36,7 +36,7 @@ export const siteConfig = {
    */
   homeSlug: 'index1',
   legacyHomeSlugs: [],
-  redirect404ToHome: true,
+  redirect404ToHome: false,
 
   apk: {
     url: 'https://github.com/arkhan66648/VVSTreamsdownload/releases/download/v3.3/VVStreams-3.3.apk',
@@ -52,15 +52,102 @@ export const siteConfig = {
       label: 'arm64-v8a · armeabi-v7a · x86 · x86_64',
       count: 4,
     },
+    /**
+     * Read from the AndroidManifest.xml of the published v3.3 APK.
+     * Each entry describes what the permission allows, not a guarantee of use.
+     */
+    permissions: [
+      {
+        name: 'INTERNET',
+        detail: 'Open network connections, which the app needs for streams and app data.',
+      },
+      {
+        name: 'ACCESS_NETWORK_STATE',
+        detail: 'Read the current network state, such as whether Wi-Fi or mobile data is connected.',
+      },
+      {
+        name: 'WAKE_LOCK',
+        detail: 'Keep the processor awake while playback is active.',
+      },
+      {
+        name: 'FOREGROUND_SERVICE',
+        detail: 'Run a foreground service, which Android shows as an ongoing notification.',
+      },
+      {
+        name: 'FOREGROUND_SERVICE_MEDIA_PLAYBACK',
+        detail: 'Run that foreground service as a media playback service on Android 14 and newer.',
+      },
+      {
+        name: 'SYSTEM_ALERT_WINDOW',
+        detail: 'Draw over other apps, which the floating player uses. Android asks you to grant it in system settings.',
+      },
+      {
+        name: 'REQUEST_INSTALL_PACKAGES',
+        detail: 'Ask Android to install an APK. Android still shows its own confirmation screen before anything is installed.',
+      },
+      {
+        name: 'com.google.android.gms.permission.AD_ID',
+        detail: 'Read the advertising ID. Declared by the advertising libraries included in the build.',
+      },
+      {
+        name: 'ACCESS_ADSERVICES_AD_ID',
+        detail: 'Access the Privacy Sandbox advertising ID on Android 13 and newer.',
+      },
+      {
+        name: 'ACCESS_ADSERVICES_ATTRIBUTION',
+        detail: 'Access Privacy Sandbox attribution data on Android 13 and newer.',
+      },
+      {
+        name: 'com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE',
+        detail: 'Read install-referrer information supplied by the app store that installed the app.',
+      },
+      {
+        name: 'com.vvstreams.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION',
+        detail: 'An app-private permission that keeps internal broadcast receivers unexported.',
+      },
+    ],
   },
 
   /** Cosmetic address. Every appearance links to the homepage. */
   contactDisplay: 'admin@vvstreams.site',
 
+  /**
+   * Ownership, kept low-key: stated on the About page, in the legal pages and
+   * in structured data. The homepage describes the app and the download without
+   * making an ownership claim.
+   */
+  publisher: {
+    note: 'This site is run by the team that publishes the VVStreams app.',
+  },
+
   analytics: {
     histatsEnabled: true,
     histatsId: '5060228',
   },
+
+  /** Shown on the homepage so the file's declared access can be reviewed. */
+  releases: [
+    {
+      version: '3.3',
+      date: '2026-10-24',
+      notes: ['Version 3.3. No release notes were published with this build.'],
+    },
+    {
+      version: '3.2',
+      date: '2026-10-18',
+      notes: ['Fixed the floating player issue and background audio.'],
+    },
+    {
+      version: '3.1 (republished)',
+      date: '2026-10-17',
+      notes: ['Floating player issue fixed.'],
+    },
+    {
+      version: '3.1',
+      date: '2026-10-12',
+      notes: ['Version 3.1.'],
+    },
+  ],
 
   manifest: {
     name: 'VVStreams App',
@@ -90,6 +177,7 @@ export const siteConfig = {
     { label: 'Terms', href: '/terms/' },
     { label: 'Disclaimer', href: '/disclaimer/' },
     { label: 'Copyright', href: '/copyright/' },
+    { label: 'DMCA', href: '/dmca/' },
     { label: 'About', href: '/about/' },
     { label: 'Contact', href: '/contact/' },
   ],
@@ -100,17 +188,17 @@ export const siteConfig = {
     about: {
       title: 'About',
       description:
-        'About {siteHost}: an independent download and setup page for the {appName} Android app.',
+        'Who runs {siteHost}, how the {appName} release is checked, and how to report a problem with the download.',
     },
     contact: {
       title: 'Contact',
       description:
-        'Contact details for {siteHost}. The published address links back to the {appName} homepage.',
+        'How to reach the team behind {siteHost} about the {appName} download, a broken file or a rights complaint.',
     },
     privacy: {
       title: 'Privacy Policy',
       description:
-        'How {siteHost} uses Histats analytics, cookies and hosting logs, and what choices visitors have.',
+        'What {siteHost} collects, how Histats analytics is gated behind consent, and what choices visitors have.',
     },
     terms: {
       title: 'Terms of Use',
@@ -120,29 +208,34 @@ export const siteConfig = {
     disclaimer: {
       title: 'Disclaimer',
       description:
-        '{siteHost} is an independent download page. It is not affiliated with any league, team, broadcaster or streaming service.',
+        '{siteHost} publishes the {appName} Android app and is not affiliated with any league, team, broadcaster or streaming service.',
     },
     copyright: {
       title: 'Copyright',
       description:
-        'Copyright and trademark information for {siteHost}, and how to report content that infringes your rights.',
+        'Copyright and trademark information for {siteHost}, and how to raise a rights complaint about the site or the app.',
+    },
+    dmca: {
+      title: 'DMCA and Takedown',
+      description:
+        'How to send a copyright or takedown notice about {siteHost} or the {appName} release, what a notice must contain, and how quickly we respond.',
     },
   },
 
   content: {
     sports: [
-      { name: 'NFL', descriptor: 'American football' },
-      { name: 'NBA', descriptor: 'Professional basketball' },
-      { name: 'MLB', descriptor: 'Major League Baseball' },
-      { name: 'NHL', descriptor: 'Ice hockey' },
-      { name: 'Soccer', descriptor: 'Global leagues and cups' },
-      { name: 'UFC', descriptor: 'Mixed martial arts' },
-      { name: 'WWE', descriptor: 'Professional wrestling' },
-      { name: 'Tennis', descriptor: 'Tours and Grand Slams' },
+      { name: 'American football', descriptor: 'Professional and college' },
+      { name: 'Basketball', descriptor: 'Professional and college' },
+      { name: 'Baseball', descriptor: 'Major leagues' },
+      { name: 'Ice hockey', descriptor: 'Professional leagues' },
+      { name: 'Soccer', descriptor: 'Leagues and cups' },
+      { name: 'Combat sports', descriptor: 'MMA and boxing' },
+      { name: 'Wrestling', descriptor: 'Professional wrestling' },
+      { name: 'Tennis', descriptor: 'Tours and majors' },
       { name: 'Cricket', descriptor: 'International and franchise' },
-      { name: 'Basketball', descriptor: 'Pro and college' },
-      { name: 'Football', descriptor: 'Pro and college' },
-      { name: 'More sports', descriptor: 'Boxing, golf, motorsport, rugby' },
+      { name: 'Motorsport', descriptor: 'Formula and endurance' },
+      { name: 'Golf', descriptor: 'Tours and majors' },
+      { name: 'Rugby', descriptor: 'Union and league' },
     ],
 
     devices: [
@@ -186,15 +279,15 @@ export const siteConfig = {
     faqs: [
       {
         q: 'What is {appName}?',
-        a: '{appName} is an Android app built for following live sports. It brings scores, schedules and sports coverage into one place on phones, tablets and Android TV. This page is a download and setup resource for the app; it is not the app itself.',
+        a: '{appName} is an Android app for watching live sport on phones, tablets, Android TV and Fire TV devices. This page is where we publish the APK, with the file details, install steps and permission list for the current release.',
       },
       {
         q: 'Is {appName} free to download?',
-        a: 'The APK is completely free to download. You can download the latest version on this page and install it on any compatible Android device. Any account, subscription or regional requirement inside the app is set by the app and its content providers, not by this page.',
+        a: 'The APK is free to download from this page. Anything that happens inside the app — an account, a subscription or a regional restriction — is set by the app and the providers behind the streams, not by this page.',
       },
       {
         q: 'What Android version does {appName} need?',
-        a: 'Version {version} requires Android {minAndroid} (API {minApi}) or newer. It includes 64-bit and 32-bit native libraries, so it works on most modern phones, tablets and TV boxes.',
+        a: 'Version {version} requires Android {minAndroid} (API {minApi}) or newer. It includes 64-bit and 32-bit native libraries, so it runs on most modern phones, tablets and TV boxes.',
       },
       {
         q: 'Does {appName} work on Android TV?',
@@ -214,7 +307,7 @@ export const siteConfig = {
       },
       {
         q: 'How do I update {appName}?',
-        a: 'Download the newer APK from the same release source, then install it over the existing app. Android usually keeps your data when the package name and signing key match. Back up anything important first.',
+        a: 'Download the newer APK from this page, then install it over the existing app. Android usually keeps your data when the package name and signing key match. Back up anything important first.',
       },
       {
         q: 'Why won’t the {appName} APK install?',
@@ -222,11 +315,15 @@ export const siteConfig = {
       },
       {
         q: 'Is the {appName} APK safe?',
-        a: 'No APK can be guaranteed safe. Download it from the original release linked on this page, scan it with your own security software, review the permissions Android shows, and avoid modified builds from unknown sites. Install at your own risk.',
+        a: 'The download section links to the file we publish. Before installing, check that the name ends in .apk, that the size matches the details on this page, and that the permissions Android lists match the table in section 07. A build from another site is not the same file.',
+      },
+      {
+        q: 'Why does the app ask for overlay and install permissions?',
+        a: 'The overlay permission is what the floating player uses to draw over other apps. The install permission lets the app hand a new APK to Android’s installer, which still asks you to confirm. Both are granted per app in system settings and can be revoked at any time.',
       },
       {
         q: 'Is {appName} available in my country?',
-        a: 'Availability depends on the app and on the rights held by broadcasters in your region. This page does not provide streams or bypass regional restrictions. Use services you are licensed to access.',
+        a: 'Availability depends on the app and on the rights held by broadcasters in your region. This page does not provide streams or regional workarounds. Use services you are licensed to access.',
       },
     ],
   },

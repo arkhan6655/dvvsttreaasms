@@ -5,6 +5,7 @@ import {
   homeUrl,
   renderTemplate,
   legalUpdatedLabel,
+  publisher,
 } from '../lib/site';
 
 const { appName, contactDisplay: contact } = siteConfig;
@@ -12,7 +13,8 @@ const { appName, contactDisplay: contact } = siteConfig;
 const sections = [
   { id: 'purpose', label: 'Purpose' },
   { id: 'checking', label: 'How details are checked' },
-  { id: 'independence', label: 'Independence' },
+  { id: 'who', label: 'Who runs this site' },
+  { id: 'reporting', label: 'Reporting a problem' },
   { id: 'contact', label: 'Contact' },
 ];
 ---
@@ -21,15 +23,15 @@ const sections = [
   title={siteConfig.pages.about.title}
   description={renderTemplate(siteConfig.pages.about.description)}
   heading="About this page"
-  lede={`A short, independent resource for the ${appName} APK: what it is, what was checked, and how to install it.`}
+  lede={`Download and release notes for the ${appName} Android app: what it is, what was checked, and how to report a problem.`}
   updated={legalUpdatedLabel}
   sections={sections}
 >
   <h2 id="purpose">Purpose</h2>
   <p>
-    This site exists to make one thing easier: getting the {appName} Android app onto a phone,
-    tablet or TV without guessing which download button is real. It brings the file details,
-    installation steps, device notes and common problems onto a single page.
+    This site exists to make one thing easier: getting the {appName} APK onto a phone, tablet or TV
+    without guessing which download button is real. It publishes the file we ship, together with its
+    details, install steps, device notes and permission list.
   </p>
   <p>
     The page is static and small on purpose. There is one direct APK link, placed in the middle of
@@ -40,24 +42,37 @@ const sections = [
   <h2 id="checking">How details are checked</h2>
   <p>
     Before a release is listed, the published APK is inspected for its version name, package name,
-    minimum Android version, native architectures and file size. Those values are shown on the
-    homepage and updated when the developer publishes a new build.
+    minimum Android version, native architectures, file size and declared permissions. Those values
+    are shown on the homepage and updated when a new build is published.
   </p>
   <p>
-    The file itself is hosted by the developer outside this site. This site does not re-upload,
-    repackage or modify it. If the file at the download link changes, the details on this page may be
-    out of date until the next review. Check what your browser shows before installing.
+    The file is served by an external download host. This site does not re-upload, repackage or
+    modify it. If the file at the download link changes, the details on this page may be out of date
+    until the next review. Check what your browser shows before installing.
   </p>
 
-  <h2 id="independence">Independence</h2>
+  <h2 id="who">Who runs this site</h2>
   <p>
-    This is not an app store listing and is not run by the app’s developer. It is also not
-    affiliated with any league, team, broadcaster or streaming service. Names are used only to
-    describe the app and the sports it covers.
+    {publisher.note} We build the app and publish the APK, so the download here is the file we ship.
+    The site is not affiliated with any league, team, broadcaster or streaming service, and nothing
+    on it implies endorsement by one. Names of sports are used only to describe how the app is
+    organised.
   </p>
   <p>
-    There are no ads or paid placements on this page. The site uses Histats to count visits; that is
-    explained in the <a href="/privacy/">privacy policy</a>.
+    The site uses Histats to count visits. Analytics stays off until a visitor allows it; that is
+    explained in the <a href="/privacy/">privacy policy</a>. There are no ads or paid placements on
+    the site.
+  </p>
+
+  <h2 id="reporting">Reporting a problem</h2>
+  <p>
+    If a download looks wrong — the file name is unexpected, the size does not match, an installer
+    tries to run, or a page asks for payment — use the <a href="/contact/">contact page</a> and say
+    which browser and device you used. Do not install a file that looks tampered with.
+  </p>
+  <p>
+    For copyright or rights complaints, use the <a href="/dmca/">DMCA and takedown page</a>. It
+    lists what a notice needs to include and where to send it.
   </p>
 
   <h2 id="contact">Contact</h2>
