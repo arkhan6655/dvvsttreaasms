@@ -1062,6 +1062,50 @@ summary {
   letter-spacing: 0.05em;
 }
 
+/* Comparison table: force exact column alignment */
+.table-block .data-table th,
+.table-block .data-table td {
+  width: 14.28% !important;
+  min-width: 80px;
+  padding: 8px 4px !important;
+  box-sizing: border-box !important;
+  border-bottom: 1px solid var(--line) !important;
+  border-right: none !important;
+  vertical-align: top;
+}
+
+/* Override existing padding differences */
+.table-block .data-table thead th {
+  padding: 8px 4px !important;
+  border-bottom: 1px solid var(--line) !important;
+  color: var(--muted) !important;
+  font-size: 10.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.11em !important;
+  text-transform: uppercase !important;
+}
+
+.table-block .data-table tbody th,
+.table-block .data-table tbody td {
+  padding: 8px 4px !important;
+  border-bottom: 1px solid var(--line) !important;
+  color: var(--muted);
+  font-size: 14.5px;
+}
+
+/* Kill first-column special width rule */
+.table-block .data-table tbody td:first-of-type {
+  width: 14.28% !important;
+}
+
+/* Mobile: maintain alignment */
+@media (max-width: 768px) {
+  .table-block .data-table th,
+  .table-block .data-table td {
+    padding: 8px 4px !important;
+  }
+}
+
 .data-table {
   width: 100%;
   border-collapse: collapse;
