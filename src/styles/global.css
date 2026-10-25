@@ -2111,19 +2111,33 @@ summary {
 /* Fix comparison table on mobile - ensure headers visible and equal column widths */
 @media (max-width: 700px) {
   .table-block .data-table thead {
-    display: table-header-group;
+    display: table-header-group !important;
   }
   .table-block .data-table tbody tr {
-    display: table-row;
+    display: table-row !important;
   }
   .table-block .data-table th,
   .table-block .data-table td {
-    display: table-cell;
-    width: 14.28%;
-    padding: 8px 4px;
+    display: table-cell !important;
+    width: 14.28% !important;
+    min-width: 80px;
+    padding: 8px 4px !important;
+    box-sizing: border-box !important;
+    border-bottom: 1px solid var(--line) !important;
+    border-right: none !important;
+    vertical-align: top;
   }
   .table-block .data-table tbody td:first-of-type {
-    width: 14.28%;
+    width: 14.28% !important;
+  }
+  
+  /* Override the aggressive existing rules that hide headers and break table structure */
+  .table-block .data-table {
+    display: table !important;
+    width: 100% !important;
+  }
+  .table-block .data-table tbody {
+    display: table-row-group !important;
   }
 }
 
