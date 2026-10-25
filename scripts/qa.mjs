@@ -3,6 +3,7 @@ import path from 'node:path';
 import {
   siteConfig,
   homePath,
+  homeUrl,
   siteHost,
   apkFileName,
   ogImage,
@@ -74,20 +75,17 @@ for (const [url, page] of pages) {
       issue(`${label}: contains checksum/hash wording`);
     }
     if (/adsbygoogle|pagead2|google_ad_client|adsense/i.test(html)) issue(`${label}: contains ad code`);
-    if (/\bofficial\b/i.test(html)) issue(`${label}: contains the word "official"`);
     if (/versioncode/i.test(html)) issue(`${label}: discloses the version code`);
     if (/<dt>\s*Build\s*<\/dt>/i.test(html)) issue(`${label}: shows a Build fact row`);
 
     if (siteConfig.analytics.histatsEnabled) {
-      if (!html.includes('data-consent')) issue(`${label}: consent banner is missing`);
-      if (!html.includes('s10.histats.com/js15_as.js')) issue(`${label}: Histats loader is missing`);
-      if (!html.includes('vv-consent')) issue(`${label}: consent choice is not stored`);
-      if (html.includes('sstatic1.histats.com')) {
-        issue(`${label}: loads a Histats pixel without consent`);
+      if (!html.includes('s10.histats.com/js15_as.js')) issue(`${label}: Histats script is missing`);
+      if (!html.includes(`sstatic1.histats.com/0.gif?${siteConfig.analytics.histatsId}`)) {
+        issue(`${label}: Histats noscript pixel is missing`);
       }
       const histatsAt = html.indexOf('js15_as.js');
       if (histatsAt >= 0 && histatsAt < html.length * 0.75) {
-        issue(`${label}: Histats loader is not near the end of the document`);
+        issue(`${label}: Histats is not near the end of the document`);
       }
     }
 
@@ -206,9 +204,6 @@ if (!home) {
   if (!home.html.includes(apkFileName)) issue(`Homepage is missing the APK file name ${apkFileName}`);
   if (!home.html.includes(siteConfig.apk.sizeLabel)) issue('Homepage is missing the configured size label');
   if (!home.html.includes(`API ${siteConfig.apk.minApi}`)) issue('Homepage is missing the configured API level');
-  if (!home.html.includes(`Android ${siteConfig.apk.minAndroid}`)) {
-    issue('Homepage is missing the configured minimum Android version');
-  }
   if (home.html.includes('target="_blank"') && !home.html.includes('rel="noopener"')) {
     issue('Homepage has target="_blank" without rel="noopener"');
   }

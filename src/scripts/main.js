@@ -80,16 +80,3 @@ for (const spy of spyMenus) {
 
   for (const section of sections) observer.observe(section);
 }
-
-const consentReset = document.querySelector('[data-consent-reset]');
-
-if (consentReset) {
-  consentReset.addEventListener('click', () => {
-    try {
-      window.localStorage.removeItem('vv-consent');
-    } catch (error) {
-      /* storage can be blocked; reloading still asks again */
-    }
-    window.location.reload();
-  });
-}

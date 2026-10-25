@@ -1,5 +1,5 @@
 ---
-import { siteConfig } from '../lib/site';
+import { siteConfig, homePath } from '../lib/site';
 
 const { histatsEnabled: enabled, histatsId } = siteConfig.analytics;
 ---
@@ -7,83 +7,31 @@ const { histatsEnabled: enabled, histatsId } = siteConfig.analytics;
 {
   enabled && (
     <>
-      <div class="consent" data-consent hidden>
-        <p class="consent__text">
-          <strong>Analytics is optional.</strong> This site uses Histats to count visits. Nothing is
-          sent to Histats unless you allow it.{' '}
-          <a href="/privacy/#analytics">Read the privacy policy</a>.
-        </p>
-        <div class="consent__actions">
-          <button type="button" class="btn btn--primary" data-consent-accept>
-            Allow analytics
-          </button>
-          <button type="button" class="btn btn--ghost" data-consent-decline>
-            Decline
-          </button>
-        </div>
-      </div>
-
       <script is:inline define:vars={{ histatsId }}>
+        var _Hasync = _Hasync || [];
+        _Hasync.push(['Histats.start', '1,' + histatsId + ',4,0,0,0,00010000']);
+        _Hasync.push(['Histats.fasi', '1']);
+        _Hasync.push(['Histats.track_hits', '']);
         (function () {
-          var KEY = 'vv-consent';
-          var stored = null;
-
-          try {
-            stored = window.localStorage.getItem(KEY);
-          } catch (error) {
-            stored = null;
-          }
-
-          function loadHistats() {
-            var _Hasync = window._Hasync || [];
-            window._Hasync = _Hasync;
-            _Hasync.push(['Histats.start', '1,' + histatsId + ',4,0,0,0,00010000']);
-            _Hasync.push(['Histats.fasi', '1']);
-            _Hasync.push(['Histats.track_hits', '']);
-            var script = document.createElement('script');
-            script.async = true;
-            script.src = 'https://s10.histats.com/js15_as.js';
-            (document.head || document.body).appendChild(script);
-          }
-
-          if (stored === 'granted') {
-            loadHistats();
-            return;
-          }
-
-          if (stored === 'denied') return;
-
-          var banner = document.querySelector('[data-consent]');
-          if (!banner) return;
-
-          function decide(value) {
-            try {
-              window.localStorage.setItem(KEY, value);
-            } catch (error) {
-              /* storage can be blocked; the choice still applies to this page load */
-            }
-            banner.hidden = true;
-            if (value === 'granted') loadHistats();
-          }
-
-          banner.hidden = false;
-
-          var accept = banner.querySelector('[data-consent-accept]');
-          var decline = banner.querySelector('[data-consent-decline]');
-
-          if (accept) {
-            accept.addEventListener('click', function () {
-              decide('granted');
-            });
-          }
-
-          if (decline) {
-            decline.addEventListener('click', function () {
-              decide('denied');
-            });
-          }
+          var hs = document.createElement('script');
+          hs.type = 'text/javascript';
+          hs.async = true;
+          hs.src = '//s10.histats.com/js15_as.js';
+          (
+            document.getElementsByTagName('head')[0] ||
+            document.getElementsByTagName('body')[0]
+          ).appendChild(hs);
         })();
       </script>
+      <noscript>
+        <a href={homePath} target="_blank" rel="noopener">
+          <img
+            src={`//sstatic1.histats.com/0.gif?${histatsId}&101`}
+            alt="free site statistics"
+            border="0"
+          />
+        </a>
+      </noscript>
     </>
   )
 }
