@@ -1072,6 +1072,9 @@ summary {
   border-bottom: 1px solid var(--line) !important;
   border-right: none !important;
   vertical-align: top;
+  white-space: normal !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
 }
 
 /* Override existing padding differences */
