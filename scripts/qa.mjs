@@ -125,20 +125,39 @@ if (!home) {
   if (!home.html.includes(`href="${siteConfig.siteUrl}${homePath}"`)) issue('Homepage canonical/email link missing');
 }
 
-const sitemapPath = path.join(DIST, 'sitemap-0.xml');
+const sitemapPath = path.join(DIST, 'sitemap.xml');
 if (fs.existsSync(sitemapPath)) {
   const sitemap = fs.readFileSync(sitemapPath, 'utf8');
   const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
-  if (!locs.includes(`${siteConfig.siteUrl}${homePath}`)) issue('Sitemap does not include the configured homepage');
-  if (locs.includes(`${siteConfig.siteUrl}/`)) issue('Sitemap includes the root redirect page');
+  const locSet = new Set(locs);
+
+  if (!locSet.has(`${siteConfig.siteUrl}${homePath}`)) issue('Sitemap does not include the configured homepage');
+  if (locSet.has(`${siteConfig.siteUrl}/`)) issue('Sitemap includes the root redirect page');
   if (locs.some((loc) => loc.endsWith('/404/'))) issue('Sitemap includes the 404 page');
+
+  // Every built directory page except the root redirect and 404 must be listed,
+  // and the sitemap must not contain stale or hand-written URLs.
+  const expected = [...pages.keys()]
+    .filter((url) => url !== '/' && url.endsWith('/') && !url.endsWith('/404/'))
+    .map((url) => `${siteConfig.siteUrl}${url}`);
+  for (const loc of expected) {
+    if (!locSet.has(loc)) issue(`Sitemap is missing ${loc}`);
+  }
+  for (const loc of locs) {
+    if (!expected.includes(loc)) issue(`Sitemap contains unexpected URL ${loc}`);
+  }
   notes.push(`Sitemap URLs: ${locs.length}`);
 } else {
-  issue('sitemap-0.xml is missing');
+  issue('sitemap.xml is missing');
 }
 
-if (!fs.readFileSync(path.join(DIST, 'robots.txt'), 'utf8').includes('sitemap-index.xml')) {
-  issue('robots.txt does not reference the sitemap');
+for (const stale of ['sitemap-index.xml', 'sitemap-0.xml']) {
+  if (fs.existsSync(path.join(DIST, stale))) issue(`${stale} still exists; the site should have one sitemap`);
+}
+
+const robotsTxt = fs.readFileSync(path.join(DIST, 'robots.txt'), 'utf8');
+if (!robotsTxt.includes(`Sitemap: ${siteConfig.siteUrl}/sitemap.xml`)) {
+  issue('robots.txt does not reference sitemap.xml');
 }
 
 if (fs.readFileSync(path.join(DIST, 'CNAME'), 'utf8').trim() !== 'vvstreams.site') {

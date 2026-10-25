@@ -135,7 +135,7 @@ Use a **Domain property** for `vvstreams.site`, not a URL-prefix property:
 2. Copy the TXT value.
 3. Cloudflare → **DNS** → **Add record** → TXT, name `@`, content the value.
 4. Verify in Search Console.
-5. Submit `https://vvstreams.site/sitemap-index.xml`.
+5. Submit `https://vvstreams.site/sitemap.xml`.
 
 A domain property survives the move from `/index1/` to `/index2/`, so verification does not need to be repeated.
 
@@ -165,7 +165,7 @@ curl -I https://vvstreams.site/privacy/
 curl https://vvstreams.site/robots.txt
 # expect the sitemap line
 
-curl https://vvstreams.site/sitemap-index.xml
+curl https://vvstreams.site/sitemap.xml
 ```
 
 Browser checks:

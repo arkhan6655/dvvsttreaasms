@@ -1,8 +1,5 @@
 import { defineConfig } from 'astro/config';
-import sitemap from '@astrojs/sitemap';
 import { siteConfig } from './site.config.mjs';
-
-const rootUrl = `${siteConfig.siteUrl}/`;
 
 export default defineConfig({
   site: siteConfig.siteUrl,
@@ -14,9 +11,4 @@ export default defineConfig({
     format: 'directory',
     inlineStylesheets: 'never',
   },
-  integrations: [
-    sitemap({
-      filter: (page) => page !== rootUrl && !page.endsWith('/404/'),
-    }),
-  ],
 });

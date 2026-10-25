@@ -7,7 +7,7 @@ Static download and information site for the VVStreams Android app, built with A
 - Astro 7, static output, no UI framework
 - Self-hosted Barlow Condensed subset, system UI body font
 - One bundled CSS file and one small JS file
-- `@astrojs/sitemap` for `sitemap-index.xml`
+- One flat `sitemap.xml` generated from the site config
 - Histats analytics on every page
 - No advertising code, no consent gate, no third-party frameworks
 
@@ -36,7 +36,7 @@ npm run qa
 - no advertising code
 - no “official” wording
 - internal links and anchor targets
-- sitemap contents, canonical tags and the live APK size
+- sitemap contents (one flat `sitemap.xml`), canonical tags and the live APK size
 
 ## One config file
 
@@ -58,7 +58,7 @@ After changing `homeSlug`, update the Cloudflare root redirect as well. See [`DE
 
 ```
 site.config.mjs          single source of truth
-astro.config.mjs         Astro, sitemap, trailing slashes, CSS output
+astro.config.mjs         Astro, trailing slashes, CSS output
 src/pages/[home].astro   config-driven homepage
 src/pages/*.astro        legal pages, 404, root fallback
 src/components/          header, footer, hero, ticker, download card, FAQ, Histats
